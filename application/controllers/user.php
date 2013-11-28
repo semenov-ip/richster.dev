@@ -1,6 +1,22 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User extends CI_Controller {
+  private $headerArr;
+
+  function __construct(){
+    parent::__construct();
+    
+    $this->load->helper('css_js_helper');
+
+    $this->headerArr = array(
+      'css' => css_js_helper('css'),
+      'js' => css_js_helper('js')
+    );
+    
+    // Если пользователь не зашел на сайт
+    $this->load->helper('user_authentication');
+    user_authentication();
+  }
 
   /**
    * Index Page for this controller.
@@ -17,9 +33,11 @@ class User extends CI_Controller {
    * map to /index.php/welcome/<method_name>
    * @see http://codeigniter.com/user_guide/general/urls.html
    */
-  public function index()
-  {
-    echo 111;
+  public function index(){
+    
+    $data['header'] = $this->headerArr;
+
+    $this->load->view('user_tpl', $data);
   }
 }
 
