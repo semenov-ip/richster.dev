@@ -2,7 +2,7 @@
     
 class Authentication extends CI_Controller{
   private $headerArr;
-        
+
   function __construct(){
     /*
      * Определяем основные параметры heder - заголовков
@@ -19,9 +19,6 @@ class Authentication extends CI_Controller{
     );
   }
   
-  // Вход в административную часть сайта.
-  // Сожержание пароля: md5(10цифр),
-  // sh1(5цифр) - solt, прописан в config
   public function login(){
     if($this->session->userdata('user')){
       redirect( "/", 'location' );
