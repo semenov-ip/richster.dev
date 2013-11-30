@@ -2,15 +2,15 @@
   /**
   * редирект, если пользовательне зашел под своим логином и паролем
   */
-  if(!function_exists('user_authentication')){
+  if(!function_exists('company_authentication')){
       
-    function user_authentication() {
+    function company_authentication() {
 
       $CI =& get_instance();
 
-      $CI->load->helper('check_user');
+      $CI->load->helper('check_company');
       
-      if(!$CI->session->userdata('user') && !check_user($CI->session->userdata('user'))){
+      if(!$CI->session->userdata('company')){
 
         $CI->session->sess_destroy();
 

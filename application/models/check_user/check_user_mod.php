@@ -9,17 +9,17 @@
     }
     
     // Проверка пользователя
-    function checkData($dataUserLogin){
+    function checkData($dataUserLogin, $dbTableName, $select){
       if( !empty($dataUserLogin) ){
         
-        $this->db->select('id_user, email');
+        $this->db->select($select);
         
         $this->db->where($dataUserLogin);
         
-        $query = $this->db->get( $this->table_user );
+        $query = $this->db->get( $dbTableName );
         
         if( $query->num_rows() == 1 ){
-          foreach( $query->result() as $row ){
+          foreach( $query->result_array() as $row ){
             return $row;
           }
         }
