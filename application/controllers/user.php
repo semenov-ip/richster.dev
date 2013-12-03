@@ -18,28 +18,37 @@ class User extends CI_Controller {
     user_authentication();
   }
 
-  /**
-   * Index Page for this controller.
-   *
-   * Maps to the following URL
-   *    http://example.com/index.php/welcome
-   *  - or -  
-   *    http://example.com/index.php/welcome/index
-   *  - or -
-   * Since this controller is set as the default controller in 
-   * config/routes.php, it's displayed at http://example.com/
-   *
-   * So any other public methods not prefixed with an underscore will
-   * map to /index.php/welcome/<method_name>
-   * @see http://codeigniter.com/user_guide/general/urls.html
-   */
   public function index(){
-    
+    $userDataCurrentAccunt = $this->session->userdata('user');
+
+    $data['user'] = $this->rich_users($userDataCurrentAccunt['user_id']);
+
+    $data['account_user'] = $this->rich_account_user($userDataCurrentAccunt['user_id']);
+
     $data['header'] = $this->headerArr;
 
     $this->load->view('user_tpl', $data);
   }
+
+  function rich_users($user_id){
+    $this->load->model('extract_data');
+    $whereDataArr = array(
+      'user_id' => $user_id
+    );
+    
+    return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
+  }
+
+  function rich_account_user($user_id){
+    $this->load->model('extract_data');
+
+    $whereDataArr = array(
+      'user_id' => $user_id
+    );
+    
+    return $this->extract_data->extract_where_all($whereDataArr, __FUNCTION__);
+  }
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+
+

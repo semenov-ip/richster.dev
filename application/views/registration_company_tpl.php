@@ -78,7 +78,7 @@
     </div>
 
     <div class="footer">
-    <p>&copy; Company 2013</p>
+    <p>&copy; Richster 2013</p>
     </div>
 
   </div>

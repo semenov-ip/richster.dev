@@ -11,11 +11,12 @@ class get_phone_status_api extends CI_Controller {
   // Добовление данных, кросбраузерный ajax запрос
   function index($hash=NULL){
     
-    return statusIncorect();
+    return $this->statusIncorect();
     
   }
 
   function statusIncorect(){
+
     echo json_encode(array('success' => 0, 'transaction_id' => 'uywqerutwq23', 'status_id' => '1'));
   }
   

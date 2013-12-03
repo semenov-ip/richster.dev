@@ -9,7 +9,7 @@
       echo '<link rel="stylesheet" type="text/css" href="/css/'.$css.'" />';
     }
     foreach( $header['js'] as $js ){
-       echo '<script type="text/javascript" src="'.$js.'"></script>';
+       echo '<script type="text/javascript" src="/js/'.$js.'"></script>';
     }
   ?>
 </head>

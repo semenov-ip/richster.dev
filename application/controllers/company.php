@@ -18,27 +18,34 @@ class Company extends CI_Controller {
     company_authentication();
   }
 
-  /**
-   * Index Page for this controller.
-   *
-   * Maps to the following URL
-   *    http://example.com/index.php/welcome
-   *  - or -  
-   *    http://example.com/index.php/welcome/index
-   *  - or -
-   * Since this controller is set as the default controller in 
-   * config/routes.php, it's displayed at http://example.com/
-   *
-   * So any other public methods not prefixed with an underscore will
-   * map to /index.php/welcome/<method_name>
-   * @see http://codeigniter.com/user_guide/general/urls.html
-   */
   public function index(){
+    $companyDataCurrent = $this->session->userdata('company');
+
+    $data['company'] = $this->rich_company($companyDataCurrent['company_id']);
+
+    $data['company_shop'] = $this->rich_company_shop($companyDataCurrent['company_id']);
+
     $data['header'] = $this->headerArr;
 
-    $this->load->view('user_tpl', $data);
+    $this->load->view('company_tpl', $data);
+  }
+
+  function rich_company($company_id){
+    $this->load->model('extract_data');
+    $whereDataArr = array(
+      'company_id' => $company_id
+    );
+    
+    return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
+  }
+
+  function rich_company_shop($currentCompanyId){
+    $this->load->model('extract_data');
+
+    $whereDataArr = array(
+      'company_id' => $currentCompanyId
+    );
+    
+    return $this->extract_data->extract_where_all($whereDataArr, __FUNCTION__);
   }
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */

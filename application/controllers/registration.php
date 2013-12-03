@@ -27,7 +27,7 @@ class Registration extends CI_Controller{
 
     $data['header'] = $this->headerArr;
     
-    $this->load->view( 'registration_tpl', $data );
+    $this->load->view( 'registration_user_tpl', $data );
   }
 
   function getPostDataRegistration(){
