@@ -30,7 +30,7 @@
         <div class="form-group">
           <label  class="col-sm-5 control-label">Номер заказа: </label>
           <div class="col-sm-7">
-            <input type="text" name="order_id" class="form-control" placeholder="Номер заказа">
+            <input type="text" name="order_num" class="form-control" placeholder="Номер заказа">
           </div>
         </div>
 

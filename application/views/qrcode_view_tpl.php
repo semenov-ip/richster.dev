@@ -27,7 +27,7 @@
         <tr>
           <td><?php echo $qrcode->amount; ?> руб.</td>
           <td><?php echo $qrcode->description; ?></td>
-          <td><?php echo $qrcode->order_id; ?></td>
+          <td><?php echo $qrcode->order_num; ?></td>
           <td><?php echo date("d/m/Y", $qrcode->data_add); ?></td>
           </td>
         </tr>

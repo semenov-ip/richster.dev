@@ -46,7 +46,11 @@ class Registration extends CI_Controller{
 
       $_POST['password'] = md5($_POST['email'].$_POST['password']);
 
-      $this->rich_users($_POST);
+      $dataUserId = $this->rich_users($_POST);
+
+      if($dataUserId){
+        $this->rich_account_user($dataUserId, $_POST['phone']);
+      }
     }
   }
 
@@ -59,11 +63,25 @@ class Registration extends CI_Controller{
 
   function rich_users($dataDbAdd){
     $this->load->model('insert_data_this_function_mod');
-    $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
     
+    return $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
+  }
+
+  function rich_account_user($dataUserId, $phone_user){
+    $this->load->model('insert_data_this_function_mod');
+    
+    $dataDbAdd = array(
+      'user_id' => $dataUserId,
+      'account_type_id' => 5,
+      'account_name' => 'Ричстер',
+      'account_number' => intval($phone_user),
+      'account_balance' => 0
+    );
+
+    $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
+
     if($queryStatus){
       redirect("/authentication/login/", 'location');
     }
   }
-
 }

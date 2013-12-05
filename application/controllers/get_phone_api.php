@@ -10,34 +10,144 @@ class Get_phone_api extends CI_Controller {
 
   // Добовление данных, кросбраузерный ajax запрос
   function index($hash=NULL){
-    
-    
-    
-    $data = array(
-      'data' => json_encode($_POST)
-    );
-    $this->db->insert('test_data', $data);
-    
-    
-    if( isset($_POST['data'])){
-    
-      $hash_str = md5(md5($_POST['data']).md5($this->config->item('city_call')));
+
+    $_POST = array("amount" => 10, "company_id" => 1, "order_num" => 12345, "shop_id" => 1, "user_id" => 1);
+
+    if(!empty($_POST)){
+      
+      $hash_str = md5(json_encode($_POST));
 
       if($hash_str == $hash){
 
-        $dataCityCall = json_decode($_POST['data']);
+        $transaction = $this->saveOrderPostData($_POST);
+        
+        if(!$transaction) return $this->statusIncorect();
 
-        return $this->statusCorrect();
+        return $this->statusCorrect($transaction);
       }
     }
     return $this->statusIncorect();
   }
 
+  function saveOrderPostData($getDataApiPhone){
+    if(!empty($getDataApiPhone)){
+      foreach ($getDataApiPhone as $key => $value) {
+        $getDataApiPhone[$key] = trim($value);
+        if( empty($getDataApiPhone[$key]) ){
+          return false;
+        }
+      }
+
+      $statusDescription = $this->operationTransactionGetStatusUser($getDataApiPhone);
+      
+      if( $statusDescription['status_id'] == 2 ){
+
+        $this->rich_account_company($getDataApiPhone['company_id'], $getDataApiPhone['amount']);
+
+      }
+
+      $getDataApiPhone['status_id'] = $statusDescription['status_id'];
+      
+      $getDataApiPhone['description_status_id'] = $statusDescription['description_status_id'];
+      
+      $getDataApiPhone['transaction'] = md5(json_encode($getDataApiPhone));
+      
+      return $this->rich_order($getDataApiPhone);
+    }
+  }
+
+  function operationTransactionGetStatusUser($getDataApiPhone){
+    return $this->checkUserBalance($getDataApiPhone['user_id'], $getDataApiPhone['amount']);
+  }
+
+  function checkUserBalance($user_id, $amount){
+    $this->load->model('extract_data');
+    $whereDataArr = array(
+      'user_id' => $user_id,
+      'account_balance >' => $amount
+    );
+    
+    $countAscName = "account_user_id";
+    
+    $userAccount = $this->extract_data->extract_where_limit_asc($whereDataArr, 'rich_account_user', $countAscName);
+    
+    if( !empty($userAccount) ){
+      
+      $balanceUser = $userAccount->account_balance - $amount;
+      
+      $this->rich_account_user($userAccount->account_user_id, $balanceUser);
+
+      return $statusDescription = array('status_id' => 2, 'description_status_id' => 2);
+
+    } else {
+
+      return $statusDescription = array('status_id' => 3, 'description_status_id' => 3);
+
+    }
+  }
+
+  function rich_account_user($account_user_id, $balanceUser){
+    $this->load->model('update_data_this_function_mod');
+
+    $dataDbUpdate = array(
+      'account_balance' => $balanceUser
+    );
+
+    $whereDataArr = array(
+      'account_user_id' => $account_user_id
+    );
+
+    $this->update_data_this_function_mod->update_where_id($dataDbUpdate, $whereDataArr, __FUNCTION__);
+  }
+
+  function rich_account_company($company_id, $amount){
+    $this->load->model('update_data_this_function_mod');
+    
+    $this->load->model('extract_data');
+    
+    $whereDataArr = array(
+      'company_id' => $company_id
+    );
+    
+    $accountCompany = $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
+
+    $dataDbUpdate = array(
+      'account_company_balance' => $amount + $accountCompany->account_company_balance
+    );
+
+    $whereDataArr = array(
+      'company_id' => $company_id
+    );
+
+    $this->update_data_this_function_mod->update_where_id($dataDbUpdate, $whereDataArr, __FUNCTION__);
+  }
+
+  function rich_order($dataDbAdd){
+    $this->load->model('insert_data_this_function_mod');
+    
+    $this->load->model('update_data_this_function_mod');
+    
+    $idOrderCurrent = $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
+
+    $dataDbUpdate['transaction'] = md5($dataDbAdd['transaction'].$idOrderCurrent);
+
+    $whereDataArr = array(
+      'order_id' => $idOrderCurrent
+    );
+
+    $currentQuery = $this->update_data_this_function_mod->update_where_id($dataDbUpdate, $whereDataArr, __FUNCTION__);
+
+    if($currentQuery){
+      return $dataDbUpdate['transaction'];
+    }
+    return false;
+  }
+
   function statusIncorect(){
-    echo json_encode(array('success' => 0, 'transaction_id' => 'uywqerutwq23'));
+    echo json_encode(array('success' => false));
   }
   
-  function statusCorrect(){
-    echo json_encode(array('success' => 1));
+  function statusCorrect($transaction){
+    echo json_encode(array('success' => 0, 'transaction_id' => $transaction));
   }
 }

@@ -19,11 +19,6 @@
             <td>Номер счета</td>
             <td>Деньги</td>
           </tr>
-          <tr>
-            <td>Ричстер руб</td>
-            <td><?php echo $user->phone; ?></td>
-            <td>0 руб.</td>
-          </tr>
           <?php if(!empty($account_user)){ foreach ($account_user as $accountUserObj) {
             echo "<tr><td>".$accountUserObj->account_name."</td>";
             echo "<td>".$accountUserObj->account_number."</td>";
@@ -37,6 +32,7 @@
       <div class="col-md-6">
         <h2 class="featurette-heading">История операций</h2>
         <table class="table table-striped font_size_16">
+        <?php ?>
         <tr>
           <td>1.01.2013</td>
           <td>Покупка в магазине</td>

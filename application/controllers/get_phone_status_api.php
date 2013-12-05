@@ -10,17 +10,46 @@ class get_phone_status_api extends CI_Controller {
 
   // Добовление данных, кросбраузерный ajax запрос
   function index($hash=NULL){
+
+    $_POST = array ("transaction_id" => "62a24ace389baaebe3a2f358a23cfd40" );
     
+    if(!empty($_POST)){
+      
+      $hash_str = md5(json_encode($_POST));
+
+      if($hash_str == $hash){
+
+        $status_id = $this->rich_order( $_POST['transaction_id'] );
+
+        return $this->statusCorrect($status_id, $_POST['transaction_id']);
+      }
+    }
+
     return $this->statusIncorect();
     
   }
 
+  function rich_order( $transaction ){
+    $this->load->model('extract_data');
+    
+    $whereDataArr = array(
+      'transaction' => $transaction
+    );
+    
+    $orderData = $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
+
+    return $orderData->status_id;
+  }
+
   function statusIncorect(){
 
-    echo json_encode(array('success' => 0, 'transaction_id' => 'uywqerutwq23', 'status_id' => '1'));
+    echo json_encode(array('success' => false));
+
   }
   
-  function statusCorrect(){
-    echo json_encode(array('success' => 1));
+  function statusCorrect($status_id, $transaction){
+    
+    echo json_encode( array('success' => true, 'transaction_id' => $transaction, 'status_id' => $status_id));
+
   }
 }

@@ -46,7 +46,11 @@ class Registration_company extends CI_Controller{
 
       $_POST['password_company'] = md5($_POST['email_company'].$_POST['password_company']);
 
-      $this->rich_company($_POST);
+      $dataCompanyId = $this->rich_company($_POST);
+      
+      if($dataCompanyId){
+        $this->rich_account_company($dataCompanyId, $_POST['phone_company']);
+      }
     }
   }
 
@@ -59,11 +63,28 @@ class Registration_company extends CI_Controller{
 
   function rich_company($dataDbAdd){
     $this->load->model('insert_data_this_function_mod');
-    $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
     
+    return $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
+  }
+
+  function rich_account_company($dataCompanyId, $phone_company){
+    $this->load->model('insert_data_this_function_mod');
+    
+    $dataDbAdd = array(
+      'company_id' => $dataCompanyId,
+      'account_type_id' => 5,
+      'account_company_name' => 'Ричстер',
+      'account_company_number' => intval($phone_company),
+      'account_company_balance' => 00.00
+    );
+
+    $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
+
     if($queryStatus){
       redirect("/authentication/login/", 'location');
     }
   }
-
 }
+
+
+

@@ -19,11 +19,12 @@
             <td>Номер счета</td>
             <td>Деньги</td>
           </tr>
-          <tr>
-            <td>Ричстер руб</td>
-            <td><?php echo $company->phone_company; ?></td>
-            <td>0 руб.</td>
-          </tr>
+          <?php if(!empty($account_company)){ foreach ($account_company as $accountCompanyObj) {
+            echo "<tr><td>".$accountCompanyObj->account_company_name."</td>";
+            echo "<td>".$accountCompanyObj->account_company_number."</td>";
+            echo "<td>".$accountCompanyObj->account_company_balance." руб.</td></tr>";
+          } }
+          ?>
         </table>
       </div>
 
