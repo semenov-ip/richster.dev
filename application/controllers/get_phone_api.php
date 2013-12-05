@@ -12,13 +12,12 @@ class Get_phone_api extends CI_Controller {
   function index($hash=NULL){
 
     if(!empty($_POST)){
-      
+
       $hash_str = md5(json_encode($_POST));
 
       if($hash_str == $hash){
 
         if ( !$this->searchCurrentUser($_POST['user_id']) ) return $this->statusIncorect('Отказ. Пользователь не зарегистрирован в системе.');
-        
 
         $transaction = $this->saveOrderPostData($_POST);
         
