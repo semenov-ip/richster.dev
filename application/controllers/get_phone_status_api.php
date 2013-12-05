@@ -10,8 +10,6 @@ class get_phone_status_api extends CI_Controller {
 
   // Добовление данных, кросбраузерный ajax запрос
   function index($hash=NULL){
-
-    $_POST = array ("transaction_id" => "62a24ace389baaebe3a2f358a23cfd40" );
     
     if(!empty($_POST)){
       

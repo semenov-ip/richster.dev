@@ -11,13 +11,14 @@ class Get_phone_api extends CI_Controller {
   // Добовление данных, кросбраузерный ajax запрос
   function index($hash=NULL){
 
-    $_POST = array("amount" => 10, "company_id" => 1, "order_num" => 12345, "shop_id" => 1, "user_id" => 1);
-
     if(!empty($_POST)){
       
       $hash_str = md5(json_encode($_POST));
 
       if($hash_str == $hash){
+
+        if ( !$this->searchCurrentUser($_POST['user_id']) ) return $this->statusIncorect('Отказ. Пользователь не зарегистрирован в системе.');
+        
 
         $transaction = $this->saveOrderPostData($_POST);
         
@@ -26,7 +27,17 @@ class Get_phone_api extends CI_Controller {
         return $this->statusCorrect($transaction);
       }
     }
-    return $this->statusIncorect();
+    return $this->statusIncorect("Ошибка формирования данных");
+  }
+
+  function searchCurrentUser($user_id){
+    $this->load->model('extract_data');
+    
+    $whereDataArr = array(
+      'user_id' => $user_id
+    );
+    
+    return $this->extract_data->extract_where_one($whereDataArr, 'rich_users');
   }
 
   function saveOrderPostData($getDataApiPhone){
@@ -62,6 +73,7 @@ class Get_phone_api extends CI_Controller {
 
   function checkUserBalance($user_id, $amount){
     $this->load->model('extract_data');
+    
     $whereDataArr = array(
       'user_id' => $user_id,
       'account_balance >' => $amount
@@ -143,11 +155,11 @@ class Get_phone_api extends CI_Controller {
     return false;
   }
 
-  function statusIncorect(){
-    echo json_encode(array('success' => false));
+  function statusIncorect($message){
+    echo json_encode(array('success' => false, 'message' => $message));
   }
   
   function statusCorrect($transaction){
-    echo json_encode(array('success' => 0, 'transaction_id' => $transaction));
+    echo json_encode(array('success' => true, 'transaction_id' => $transaction, 'message' => "Заказ сохранен"));
   }
 }
