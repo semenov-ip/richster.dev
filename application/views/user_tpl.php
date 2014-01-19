@@ -32,12 +32,14 @@
       <div class="col-md-6">
         <h2 class="featurette-heading">История операций</h2>
         <table class="table table-striped font_size_16">
-        <?php ?>
-        <tr>
-          <td>1.01.2013</td>
-          <td>Покупка в магазине</td>
-          <td>1000 руб.</td>
-        </tr>
+          <?php if(!empty($history_order)){ foreach ($history_order as $dataOrder) { ?>
+            <tr>
+              <td><?php echo $dataOrder->data_add; ?></td>
+              <td>В магазине: <?php echo $dataOrder->shop_name; ?></td>
+              <td><?php echo $dataOrder->amount; ?> руб.</td>
+              <td><?php echo $dataOrder->status_name; ?></td>
+            </tr>
+          <?php }  } ?>
         </table>
       </div>
     </div>

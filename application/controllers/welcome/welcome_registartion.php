@@ -1,13 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     
-class Registration extends CI_Controller{
+class Welcome_registartion extends CI_Controller{
   private $headerArr;
 
   function __construct(){
-    /*
-     * Определяем основные параметры heder - заголовков
-     * дополнительные css, js указываем в config.php файле
-    */
 
     parent::__construct();
     
@@ -27,7 +23,7 @@ class Registration extends CI_Controller{
 
     $data['header'] = $this->headerArr;
     
-    $this->load->view( 'registration_user_tpl', $data );
+    $this->load->view( 'welcome/welcome_registartion_tpl', $data );
   }
 
   function getPostDataRegistration(){
@@ -46,10 +42,17 @@ class Registration extends CI_Controller{
 
       $_POST['password'] = md5($_POST['email'].$_POST['password']);
 
+      $_POST['dataadd'] = $this->config->item('date');
+
+      $_POST['hash'] = md5($_POST['email'].$_POST['password'].$_POST['dataadd']);
+
       $dataUserId = $this->rich_users($_POST);
 
       if($dataUserId){
-        $this->rich_account_user($dataUserId, $_POST['phone']);
+        
+        $functionName = "rich_account_".$_POST['who'];
+        
+        $this->$functionName($dataUserId, $_POST['phone'], $_POST['hash']);
       }
     }
   }
@@ -67,11 +70,11 @@ class Registration extends CI_Controller{
     return $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
   }
 
-  function rich_account_user($dataUserId, $phone_user){
+  function rich_account_users($idUser, $phone_user, $hash){
     $this->load->model('insert_data_this_function_mod');
     
     $dataDbAdd = array(
-      'user_id' => $dataUserId,
+      'user_id' => $idUser,
       'account_type_id' => 5,
       'account_name' => 'Ричстер',
       'account_number' => intval($phone_user),
@@ -81,7 +84,32 @@ class Registration extends CI_Controller{
     $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
 
     if($queryStatus){
-      redirect("/authentication/login/", 'location');
+
+      $this->saveSessionCurentUsers($idUser, $hash);
     }
+  }
+
+  function rich_account_company($idUser, $phone_company, $hash){
+    $this->load->model('insert_data_this_function_mod');
+    
+    $dataDbAdd = array(
+      'company_id' => $dataCompanyId,
+      'account_type_id' => 5,
+      'account_company_name' => 'Ричстер',
+      'account_company_number' => intval($phone_company),
+      'account_company_balance' => 00.00
+    );
+
+    $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
+
+    if($queryStatus){
+      $this->saveSessionCurentUsers($idUser, $hash);
+    }
+  }
+
+  function saveSessionCurentUsers($idUser, $hash){
+    $this->session->set_userdata( array('user' => array('hash' => $hash, 'user_id' => $idUser)) );
+
+    redirect( "/_shared/user_distributor/", 'location'); 
   }
 }

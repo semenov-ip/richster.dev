@@ -35,9 +35,10 @@ class Extract_data extends CI_Model{
 
         return $dataAllCurrentTable;
       }
-      
-      return false;
+
     }
+
+    return false;
   }
 
   function extract_where_limit_asc($whereDataArr, $dbNameFunction, $countAscName){
@@ -73,6 +74,34 @@ class Extract_data extends CI_Model{
       }
 
       return $dataAllCurrentTable;
+    }
+
+    return false;
+  }
+
+  function extract_where_all_join_order($whereDataArr, $dbNameFunction, $limit=false){
+    if(is_array($whereDataArr)){
+
+      $this->db->select('ro.order_id, ro.order_num, ro.amount, ro.data_add, ros.status_name, rds.description_status_name, rcs.shop_name');
+
+      if($limit){ $this->db->limit($limit); }
+
+      $this->db->where($whereDataArr);
+
+      $this->db->join('rich_order_status ros', 'ro.status_id = ros.status_id');
+      $this->db->join('rich_description_status rds', 'ro.description_status_id = rds.description_status_id');
+      $this->db->join('rich_company_shop rcs', 'ro.shop_id = rcs.shop_id');
+
+      $query = $this->db->get($dbNameFunction);
+
+      if($query->num_rows() > 0){
+        foreach ($query->result() as $row) {
+          $dataAllCurrentTable[] = $row;
+        }
+
+        return $dataAllCurrentTable;
+      }
+
     }
 
     return false;

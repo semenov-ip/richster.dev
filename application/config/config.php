@@ -26,7 +26,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -360,3 +360,20 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+/*
+|--------------------------------------------------------------------------
+| Configuration date
+|--------------------------------------------------------------------------
+|
+*/
+$config['base_url'] = '';
+
+$config['datetime']  = date("Y-m-d H:i:s", time());
+
+$config['date']  = date("Y-m-d H:i:s");
+
+$config['prefixes'] = 'rich_';
+
+$config['error_message'] = array(
+	
+);

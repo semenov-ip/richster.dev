@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     
-class Authentication extends CI_Controller{
+class Welcome_authentication extends CI_Controller{
   private $headerArr;
 
   function __construct(){
@@ -19,7 +19,7 @@ class Authentication extends CI_Controller{
     );
   }
   
-  public function login(){
+  function index(){
     $this->load->helper('check_user_redirect_url');
     check_user_redirect_url();
     

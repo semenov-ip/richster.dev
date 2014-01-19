@@ -5,14 +5,14 @@
 
     <div class="container">
       <div class="header">
-        <?php $this->load->view('menu/top_menu'); ?>
+        <?php $this->load->view('welcome/menu/top_menu'); ?>
         <h3 class="text-danger">Richster</h3>
       </div>
 
       <div class="jumbotron">
-        
-        <p><a class="btn btn-lg btn-success" href="/registration/" role="button">Зарегестрироваться</a></p>
-        
+
+        <p><a class="btn btn-lg btn-success" href="/welcome/welcome_registartion/" role="button">Зарегестрироваться</a></p>
+
         <form class="form-signin" method="POST">
           <h2 class="form-signin-heading">Вход в систему</h2>
           <input type="text" name="email" class="form-control" placeholder="Email address" required autofocus>

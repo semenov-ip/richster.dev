@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class User_history_order extends CI_Controller {
   private $headerArr;
 
   function __construct(){
@@ -61,6 +61,3 @@ class User extends CI_Controller {
     return $this->extract_data->extract_where_all_join_order($whereDataArr, __FUNCTION__." ro", 5);
   }
 }
-
-
-
