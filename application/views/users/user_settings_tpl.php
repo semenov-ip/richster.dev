@@ -1,11 +1,11 @@
 <?php
-  $this->load->view('header');
+  $this->load->view('_shared/header');
 ?>
   <body>
 
   <div class="container">
     <div class="header">
-    <?php $this->load->view('menu/user_top_menu'); ?>
+    <?php $this->load->view('users/menu/top_menu'); ?>
     <h3 class="text-danger">Richster</h3>
     </div>
 
@@ -26,7 +26,7 @@
           } }
           ?>
         </table>
-        <a href="/add_account_user/" class="btn btn-success btn-sm">Добавить</a>
+        <a href="/users/add_account_user/" class="btn btn-success btn-sm">Добавить</a>
       </div>
 
       <div class="col-md-6">

@@ -8,9 +8,7 @@
     function check_user_redirect_url(){
       $CI =& get_instance();
 
-      if($CI->session->userdata('user')){
-        return redirect( "/", 'location' );
-      }
+      if($CI->session->userdata('users')){ return redirect( "/_shared/user_distributor/", 'location'); }
 
       return false;
     }

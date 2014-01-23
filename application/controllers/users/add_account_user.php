@@ -19,7 +19,7 @@ class Add_account_user extends CI_Controller {
   }
 
   public function index(){
-    $userDataCurrentAccunt = $this->session->userdata('user');
+    $userDataCurrentAccunt = $this->session->userdata('users');
 
     $data['user'] = $this->rich_users($userDataCurrentAccunt['user_id']);
 
@@ -73,7 +73,3 @@ class Add_account_user extends CI_Controller {
     }
   }
 }
-
-
-
-

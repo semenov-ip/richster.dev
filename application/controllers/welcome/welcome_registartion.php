@@ -6,23 +6,23 @@ class Welcome_registartion extends CI_Controller{
   function __construct(){
 
     parent::__construct();
-    
+
     $this->load->helper('css_js_helper');
 
     $this->headerArr = array(
       'css' => css_js_helper('css'),
       'js' => css_js_helper('js')
     );
+
+    $this->load->helper('check_user_redirect_url');
+    check_user_redirect_url();
   }
 
   function index(){
-    $this->load->helper('check_user_redirect_url');
-    check_user_redirect_url();
-
     $this->getPostDataRegistration();    
 
     $data['header'] = $this->headerArr;
-    
+
     $this->load->view( 'welcome/welcome_registartion_tpl', $data );
   }
 
@@ -50,7 +50,7 @@ class Welcome_registartion extends CI_Controller{
 
       if($dataUserId){
         
-        $functionName = "rich_account_".$_POST['who'];
+        $functionName = "rich_account_".$_POST['type_user'];
         
         $this->$functionName($dataUserId, $_POST['phone'], $_POST['hash']);
       }
@@ -70,7 +70,7 @@ class Welcome_registartion extends CI_Controller{
     return $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
   }
 
-  function rich_account_users($idUser, $phone_user, $hash){
+  function rich_account_user($idUser, $phone_user, $hash){
     $this->load->model('insert_data_this_function_mod');
     
     $dataDbAdd = array(

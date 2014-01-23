@@ -1,5 +1,5 @@
 <?php
-  $this->load->view('header');
+  $this->load->view('_shared/header');
 ?>
  <body>
 
@@ -10,19 +10,9 @@
     </div>
 
     <div class="jumbotron">
-    
+
     <h3 class="text-danger">Зарегестрироваться</h3>
       <form class="form-horizontal" role="form" method="post">
-        <div class="form-group">
-          <label  class="col-sm-4 control-label">Зарегестрировать меня как:</label>
-          <div class="col-sm-8">
-            <select name="who" class="form-control">
-              <option value="users">Пользовтеля</option>
-              <option value="company">Компанию</option>
-            </select>
-          </div>
-        </div>
-
         <div class="form-group">
           <label  class="col-sm-4 control-label">Фаше Имя:</label>
           <div class="col-sm-8">
@@ -45,16 +35,26 @@
         </div>
         
         <div class="form-group">
+          <label for="inputEmail3" class="col-sm-4 control-label">Зарегестрировать как:</label>
+          <div class="col-sm-8">
+            <select class="form-control" name="type_user">
+              <option value="users">Пользователя</option>
+              <option value="company">Магазин</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label for="inputPassword3" class="col-sm-4 control-label">Пароль:</label>
           <div class="col-sm-8">
-            <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+            <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Пароль">
           </div>
         </div>
         
         <div class="form-group">
           <label for="inputPassword3" class="col-sm-4 control-label">Повторите пароль:</label>
           <div class="col-sm-8">
-            <input type="password" name="password_confirm" class="form-control" id="inputPassword3" placeholder="Password">
+            <input type="password" name="password_confirm" class="form-control" id="inputPassword3" placeholder="Повторите пароль">
           </div>
         </div>
 

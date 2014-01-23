@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class User_settings extends CI_Controller {
   private $headerArr;
 
   function __construct(){
@@ -14,8 +14,8 @@ class User extends CI_Controller {
     );
     
     // Если пользователь не зашел на сайт
-    $this->load->helper('user_authentication');
-    user_authentication();
+    $this->load->library('check_users_access');
+    $this->who = $this->check_users_access->checkUsers();
   }
 
   public function index(){
@@ -29,7 +29,7 @@ class User extends CI_Controller {
 
     $data['header'] = $this->headerArr;
 
-    $this->load->view('user_tpl', $data);
+    $this->load->view('users/user_settings_tpl', $data);
   }
 
   function rich_users($user_id){
@@ -61,6 +61,3 @@ class User extends CI_Controller {
     return $this->extract_data->extract_where_all_join_order($whereDataArr, __FUNCTION__." ro", 5);
   }
 }
-
-
-
