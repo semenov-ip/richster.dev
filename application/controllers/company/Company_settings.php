@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Company extends CI_Controller {
+class Company_settings extends CI_Controller {
   private $headerArr;
 
   function __construct(){
@@ -14,36 +14,36 @@ class Company extends CI_Controller {
     );
     
     // Если пользователь не зашел на сайт
-    $this->load->helper('company_authentication');
-    company_authentication();
+    $this->load->library('check_users_access');
+    $this->who = $this->check_users_access->checkUsers();
   }
 
   public function index(){
-    $companyDataCurrent = $this->session->userdata('company');
+    $companyDataCurrent = $this->session->userdata('users');
 
-    $data['account_company'] = $this->rich_account_company($companyDataCurrent['company_id']);
+    $data['account_company'] = $this->rich_account_company($companyDataCurrent['user_id']);
 
-    $data['company_shop'] = $this->rich_company_shop($companyDataCurrent['company_id']);
+    $data['company_shop'] = $this->rich_company_shop($companyDataCurrent['user_id']);
 
     $data['header'] = $this->headerArr;
 
-    $this->load->view('company_tpl', $data);
+    $this->load->view('company/company_settings_tpl', $data);
   }
 
-  function rich_account_company($company_id){
+  function rich_account_company($user_id){
     $this->load->model('extract_data');
     $whereDataArr = array(
-      'company_id' => $company_id
+      'user_id' => $user_id
     );
     
     return $this->extract_data->extract_where_all($whereDataArr, __FUNCTION__);
   }
 
-  function rich_company_shop($currentCompanyId){
+  function rich_company_shop($user_id){
     $this->load->model('extract_data');
 
     $whereDataArr = array(
-      'company_id' => $currentCompanyId
+      'user_id' => $user_id
     );
     
     return $this->extract_data->extract_where_all($whereDataArr, __FUNCTION__);

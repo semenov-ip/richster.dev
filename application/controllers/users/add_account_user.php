@@ -14,8 +14,8 @@ class Add_account_user extends CI_Controller {
     );
     
     // Если пользователь не зашел на сайт
-    $this->load->helper('user_authentication');
-    user_authentication();
+    $this->load->library('check_users_access');
+    $this->who = $this->check_users_access->checkUsers();
   }
 
   public function index(){
@@ -29,7 +29,7 @@ class Add_account_user extends CI_Controller {
 
     $data['header'] = $this->headerArr;
 
-    $this->load->view('add_account_user_tpl', $data);
+    $this->load->view('/users/add_account_user_tpl', $data);
   }
 
   function rich_users($user_id){
@@ -58,13 +58,13 @@ class Add_account_user extends CI_Controller {
       }
 
       $_POST['user_id'] = $currentUserId;
-      $this->rich_account_user($_POST);
+      $this->rich_account_users($_POST);
     }
 
     return false;
   }
 
-  function rich_account_user($dataDbAdd){
+  function rich_account_users($dataDbAdd){
     $this->load->model('insert_data_this_function_mod');
     $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
     

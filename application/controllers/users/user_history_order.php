@@ -5,21 +5,21 @@ class User_history_order extends CI_Controller {
 
   function __construct(){
     parent::__construct();
-    
+
     $this->load->helper('css_js_helper');
 
     $this->headerArr = array(
       'css' => css_js_helper('css'),
       'js' => css_js_helper('js')
     );
-    
+
     // Если пользователь не зашел на сайт
-    $this->load->helper('user_authentication');
-    user_authentication();
+    $this->load->library('check_users_access');
+    $this->who = $this->check_users_access->checkUsers();
   }
 
   public function index(){
-    $userDataCurrentAccunt = $this->session->userdata('user');
+    $userDataCurrentAccunt = $this->session->userdata('users');
 
     $data['user'] = $this->rich_users($userDataCurrentAccunt['user_id']);
 
@@ -29,7 +29,7 @@ class User_history_order extends CI_Controller {
 
     $data['header'] = $this->headerArr;
 
-    $this->load->view('user_tpl', $data);
+    $this->load->view('users/user_history_order_tpl', $data);
   }
 
   function rich_users($user_id){
@@ -37,7 +37,7 @@ class User_history_order extends CI_Controller {
     $whereDataArr = array(
       'user_id' => $user_id
     );
-    
+
     return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
   }
 
@@ -47,7 +47,7 @@ class User_history_order extends CI_Controller {
     $whereDataArr = array(
       'user_id' => $user_id
     );
-    
+
     return $this->extract_data->extract_where_all($whereDataArr, __FUNCTION__);
   }
 
@@ -58,6 +58,6 @@ class User_history_order extends CI_Controller {
       'ro.user_id' => $userId
     );
 
-    return $this->extract_data->extract_where_all_join_order($whereDataArr, __FUNCTION__." ro", 5);
+    return $this->extract_data->extract_where_all_join_order($whereDataArr, __FUNCTION__." ro");
   }
 }

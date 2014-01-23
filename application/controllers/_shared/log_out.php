@@ -9,6 +9,6 @@ class Log_out extends CI_Controller{
   function index(){
     $this->session->sess_destroy();
 
-    redirect( "/welcome/", 'location');
+    redirect( "/", 'location');
   }
 }

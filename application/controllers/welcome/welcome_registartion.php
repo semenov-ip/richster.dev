@@ -49,9 +49,9 @@ class Welcome_registartion extends CI_Controller{
       $dataUserId = $this->rich_users($_POST);
 
       if($dataUserId){
-        
+
         $functionName = "rich_account_".$_POST['type_user'];
-        
+
         $this->$functionName($dataUserId, $_POST['phone'], $_POST['hash']);
       }
     }
@@ -70,7 +70,7 @@ class Welcome_registartion extends CI_Controller{
     return $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
   }
 
-  function rich_account_user($idUser, $phone_user, $hash){
+  function rich_account_users($idUser, $phone_user, $hash){
     $this->load->model('insert_data_this_function_mod');
     
     $dataDbAdd = array(
@@ -93,7 +93,7 @@ class Welcome_registartion extends CI_Controller{
     $this->load->model('insert_data_this_function_mod');
     
     $dataDbAdd = array(
-      'company_id' => $dataCompanyId,
+      'user_id' => $idUser,
       'account_type_id' => 5,
       'account_company_name' => 'Ричстер',
       'account_company_number' => intval($phone_company),
@@ -108,7 +108,7 @@ class Welcome_registartion extends CI_Controller{
   }
 
   function saveSessionCurentUsers($idUser, $hash){
-    $this->session->set_userdata( array('user' => array('hash' => $hash, 'user_id' => $idUser)) );
+    $this->session->set_userdata( array('users' => array('hash' => $hash, 'user_id' => $idUser)) );
 
     redirect( "/_shared/user_distributor/", 'location'); 
   }

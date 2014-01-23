@@ -1,10 +1,10 @@
 <?php
-  $this->load->view('header');
+  $this->load->view('_shared/header');
 ?>
  <body>
   <div class="container">
     <div class="header">
-      <?php $this->load->view('menu/top_menu'); ?>
+      <?php $this->load->view('users/menu/top_menu'); ?>
       <h3 class="text-danger">Richster</h3>
     </div>
 
