@@ -42,7 +42,7 @@
             echo "<td align=center><a href='/qrcode_generator/index/".$companyShopObj->shop_id."/'>QR</a></td></tr>";
         } }?>
         </table>
-        <a href="/add_shop/" class="btn btn-success btn-sm">Добавить магазин</a>
+        <a href="/company/add_shop/" class="btn btn-success btn-sm">Добавить магазин</a>
       </div>
     </div>
 

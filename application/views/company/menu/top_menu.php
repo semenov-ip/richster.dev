@@ -5,9 +5,9 @@
 
   <li><a href="#">Мои магазины</a></li>
 
-  <li><a href="/qrcode_all_veiws/">Мои Qr коды</a></li>
+  <li><a href="/company/qrcode_all_veiws/">Мои Qr коды</a></li>
 
-  <li><a href="/shop_order/">Заказы</a></li>
+  <li><a href="/company/shop_order/">Заказы</a></li>
 
   <li><a href="/_shared/log_out/">Выход</a></li>
 </ul>

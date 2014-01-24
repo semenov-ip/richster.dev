@@ -14,18 +14,18 @@ class Add_shop extends CI_Controller {
     );
     
     // Если пользователь не зашел на сайт
-    $this->load->helper('company_authentication');
-    company_authentication();
+    $this->load->library('check_users_access');
+    $this->who = $this->check_users_access->checkUsers();
   }
 
   public function index(){
-    $companyDataCurrent = $this->session->userdata('company');
+    $companyDataCurrent = $this->session->userdata('users');
 
-    $this->addNewShop($companyDataCurrent['company_id']);
+    $this->addNewShop($companyDataCurrent['user_id']);
 
     $data['header'] = $this->headerArr;
 
-    $this->load->view('add_shop_tpl', $data);
+    $this->load->view('company/add_shop_tpl', $data);
   }
 
   function addNewShop($currentCompanyId){
@@ -37,7 +37,7 @@ class Add_shop extends CI_Controller {
         }
       }
 
-      $_POST['company_id'] = $currentCompanyId;
+      $_POST['user_id'] = $currentCompanyId;
       $this->rich_company_shop($_POST);
     }
 
@@ -49,7 +49,7 @@ class Add_shop extends CI_Controller {
     $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
     
     if($queryStatus){
-      redirect("/company/", 'location');
+      redirect("/company/company_settings/", 'location');
     }
   }
 }

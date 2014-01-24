@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class get_phone_status_api extends CI_Controller {
+class Get_phone_status_api extends CI_Controller {
 
   function __construct(){
     parent::__construct();

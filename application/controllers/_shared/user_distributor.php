@@ -33,7 +33,7 @@ class User_distributor extends CI_Controller{
     redirect( "/".$dataUser->type_user."/user_settings/", 'location');
   }
 
-  function company(){
+  function company($dataUser){
     redirect( "/".$dataUser->type_user."/company_settings/", 'location');
   }
 }
