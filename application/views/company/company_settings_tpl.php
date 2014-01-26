@@ -26,6 +26,29 @@
           } }
           ?>
         </table>
+
+          
+<form action="https://rbkmoney.ru/acceptpurchase.aspx" method="POST">
+<input type="hidden" name="eshopId" value="2000000">
+<input type="hidden" name="recipientAmount" value="10">
+<input type="hidden" name="recipientCurrency" value="RUR">
+<input type="hidden" name="orderId" value="111">
+<input type="hidden" name="user_email" value="email@email.com">
+<input type="hidden" name="serviceName" value="комментарий">
+<input type="hidden" name="preference" value="bankCard">
+<input type="hidden" name="successUrl" value="http://www.example.ru">
+<input type="hidden" name="failUrl" value="http://www.example.ru">
+<input type="submit" name="button" value="оплатить">
+</form>
+
+
+
+
+
+
+
+
+          
       </div>
 
       <div class="col-md-7">
@@ -39,7 +62,7 @@
         <?php if(!empty($company_shop)){ foreach ($company_shop as $companyShopObj){
             echo "<tr><td>".$companyShopObj->shop_name."</td>";
             echo "<td>".$companyShopObj->shop_description."</td>";
-            echo "<td align=center><a href='/qrcode_generator/index/".$companyShopObj->shop_id."/'>QR</a></td></tr>";
+            echo "<td align=center><a href='/company/qrcode_generator/index/".$companyShopObj->shop_id."/'>QR</a></td></tr>";
         } }?>
         </table>
         <a href="/company/add_shop/" class="btn btn-success btn-sm">Добавить магазин</a>

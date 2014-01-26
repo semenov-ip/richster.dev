@@ -2,14 +2,14 @@
 
 class Qrcode_generator extends CI_Controller {
   private $headerArr;
-  
+
   public $errorCorrectionLevel;
-  
+
   public $matrixPointSize;
 
   function __construct(){
     parent::__construct();
-    
+
     $this->load->helper('css_js_helper');
 
     $this->headerArr = array(
@@ -20,32 +20,32 @@ class Qrcode_generator extends CI_Controller {
     $this->errorCorrectionLevel = 'L';
 
     $this->matrixPointSize = 4;
-    
+
     // Если пользователь не зашел на сайт
-    $this->load->helper('company_authentication');
-    company_authentication();
+    $this->load->library('check_users_access');
+    $this->who = $this->check_users_access->checkUsers();
   }
 
   public function index($currentShopId){
 
-    $companyDataCurrent = $this->session->userdata('company');
+    $companyDataCurrent = $this->session->userdata('users');
 
-    $this->qrcodeGeneratePages($companyDataCurrent['company_id'], $currentShopId);
+    $this->qrcodeGeneratePages($companyDataCurrent['user_id'], $currentShopId);
 
     $data['header'] = $this->headerArr;
 
-    $this->load->view('qrcode_generator_tpl', $data);
+    $this->load->view('company/qrcode_generator_tpl', $data);
   }
 
   function qrcodeGeneratePages($currentCompanyId, $currentShopId){
     $this->load->helper('phpqrcode/qrlib');
 
     $PNG_TEMP_DIR = './qrcode_img/';
-    
+
     $PNG_WEB_DIR = 'qrcode_img/';
-    
+
     $filename = $PNG_TEMP_DIR.time().'_'.$currentCompanyId.'_'.$currentShopId.'_qrcode.png';
-    
+
     $dataPostFormQrJson = $this->extratcPostDataFormJson($currentCompanyId, $currentShopId);
 
     if(!$dataPostFormQrJson){ return false; }
@@ -55,7 +55,7 @@ class Qrcode_generator extends CI_Controller {
     $idQrCurrentCode = $this->dbSaveImgQrCode($PNG_WEB_DIR.basename($filename), $dataPostFormQrJson);
 
     if($idQrCurrentCode){
-      redirect("/qrcode_generator/view/$idQrCurrentCode/", 'location');
+      redirect("/company/qrcode_generator/view/$idQrCurrentCode/", 'location');
     }
   }
 
@@ -72,7 +72,7 @@ class Qrcode_generator extends CI_Controller {
       unset($_POST['size']);
       
       $_POST['shop_id'] = $currentShopId;
-      $_POST['company_id'] = $currentCompanyId;
+      $_POST['user_id'] = $currentCompanyId;
 
       return json_encode($_POST);
     }
@@ -112,7 +112,7 @@ class Qrcode_generator extends CI_Controller {
     
     $data['header'] = $this->headerArr;
 
-    $this->load->view('qrcode_view_tpl', $data);
+    $this->load->view('company/qrcode_view_tpl', $data);
 
   }
 }

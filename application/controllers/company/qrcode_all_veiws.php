@@ -21,17 +21,17 @@ class Qrcode_all_veiws extends CI_Controller {
   public function index(){
     $companyDataCurrent = $this->session->userdata('users');
 
-    $data['qrcode'] = $this->rich_qrcode($companyDataCurrent['company_id']);
+    $data['qrcode'] = $this->rich_qrcode($companyDataCurrent['user_id']);
 
     $data['header'] = $this->headerArr;
 
-    $this->load->view('qrcode_view_all', $data);
+    $this->load->view('company/qrcode_view_all', $data);
   }
 
   function rich_qrcode($company_id){
     $this->load->model('extract_data');
     $whereDataArr = array(
-      'company_id' => $company_id
+      'user_id' => $company_id
     );
     
     return $this->extract_data->extract_where_all($whereDataArr, __FUNCTION__);
