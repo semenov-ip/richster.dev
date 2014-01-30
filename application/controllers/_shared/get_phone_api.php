@@ -20,7 +20,7 @@ class Get_phone_api extends CI_Controller {
         if ( !$this->searchCurrentUser($_POST['user_id']) ) return $this->statusIncorect('Отказ. Пользователь не зарегистрирован в системе.');
 
         $transaction = $this->saveOrderPostData($_POST);
-        
+
         if(!$transaction) return $this->statusIncorect();
 
         return $this->statusCorrect($transaction);
@@ -31,11 +31,11 @@ class Get_phone_api extends CI_Controller {
 
   function searchCurrentUser($user_id){
     $this->load->model('extract_data');
-    
+
     $whereDataArr = array(
       'user_id' => $user_id
     );
-    
+
     return $this->extract_data->extract_where_one($whereDataArr, 'rich_users');
   }
 
@@ -49,7 +49,7 @@ class Get_phone_api extends CI_Controller {
       }
 
       $statusDescription = $this->operationTransactionGetStatusUser($getDataApiPhone);
-      
+
       if( $statusDescription['status_id'] == 2 ){
 
         $this->rich_account_company($getDataApiPhone['company_id'], $getDataApiPhone['amount']);
@@ -57,11 +57,11 @@ class Get_phone_api extends CI_Controller {
       }
 
       $getDataApiPhone['status_id'] = $statusDescription['status_id'];
-      
+
       $getDataApiPhone['description_status_id'] = $statusDescription['description_status_id'];
-      
+
       $getDataApiPhone['transaction'] = md5(json_encode($getDataApiPhone));
-      
+
       return $this->rich_order($getDataApiPhone);
     }
   }
@@ -72,21 +72,21 @@ class Get_phone_api extends CI_Controller {
 
   function checkUserBalance($user_id, $amount){
     $this->load->model('extract_data');
-    
+
     $whereDataArr = array(
       'user_id' => $user_id,
       'account_balance >' => $amount
     );
-    
+
     $countAscName = "account_user_id";
-    
-    $userAccount = $this->extract_data->extract_where_limit_asc($whereDataArr, 'rich_account_user', $countAscName);
-    
+
+    $userAccount = $this->extract_data->extract_where_limit_asc($whereDataArr, 'rich_account_users', $countAscName);
+
     if( !empty($userAccount) ){
-      
+
       $balanceUser = $userAccount->account_balance - $amount;
-      
-      $this->rich_account_user($userAccount->account_user_id, $balanceUser);
+
+      $this->rich_account_users($userAccount->account_user_id, $balanceUser);
 
       return $statusDescription = array('status_id' => 2, 'description_status_id' => 2);
 
@@ -97,7 +97,7 @@ class Get_phone_api extends CI_Controller {
     }
   }
 
-  function rich_account_user($account_user_id, $balanceUser){
+  function rich_account_users($account_user_id, $balanceUser){
     $this->load->model('update_data_this_function_mod');
 
     $dataDbUpdate = array(
@@ -113,13 +113,13 @@ class Get_phone_api extends CI_Controller {
 
   function rich_account_company($company_id, $amount){
     $this->load->model('update_data_this_function_mod');
-    
+
     $this->load->model('extract_data');
-    
+
     $whereDataArr = array(
-      'company_id' => $company_id
+      'user_id' => $company_id
     );
-    
+
     $accountCompany = $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
 
     $dataDbUpdate = array(
@@ -127,7 +127,7 @@ class Get_phone_api extends CI_Controller {
     );
 
     $whereDataArr = array(
-      'company_id' => $company_id
+      'user_id' => $company_id
     );
 
     $this->update_data_this_function_mod->update_where_id($dataDbUpdate, $whereDataArr, __FUNCTION__);
@@ -135,9 +135,9 @@ class Get_phone_api extends CI_Controller {
 
   function rich_order($dataDbAdd){
     $this->load->model('insert_data_this_function_mod');
-    
+
     $this->load->model('update_data_this_function_mod');
-    
+
     $idOrderCurrent = $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
 
     $dataDbUpdate['transaction'] = md5($dataDbAdd['transaction'].$idOrderCurrent);
@@ -157,7 +157,7 @@ class Get_phone_api extends CI_Controller {
   function statusIncorect($message){
     echo json_encode(array('success' => false, 'message' => $message));
   }
-  
+
   function statusCorrect($transaction){
     echo json_encode(array('success' => true, 'transaction_id' => $transaction, 'message' => "Заказ сохранен"));
   }

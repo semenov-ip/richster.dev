@@ -70,11 +70,13 @@ class Qrcode_generator extends CI_Controller {
 
       $this->matrixPointSize = $_POST['size'];
       unset($_POST['size']);
-      
+
       $_POST['shop_id'] = $currentShopId;
-      $_POST['user_id'] = $currentCompanyId;
+
+      $_POST['company_id'] = $currentCompanyId;
 
       return json_encode($_POST);
+
     }
 
     return false;
@@ -82,15 +84,20 @@ class Qrcode_generator extends CI_Controller {
 
   function dbSaveImgQrCode($img, $jsonDataForm){
     $dataForm = json_decode($jsonDataForm);
+
     foreach ($dataForm as $key => $value) {      
       
       $dataClearForm[$key] = trim($value);
 
     }
-    
+
     $dataClearForm['qrcode_img'] = $img;
-    
+
     $dataClearForm['data_add'] = time();
+
+    $dataClearForm['user_id'] = $dataClearForm['company_id'];
+
+    unset($dataClearForm['company_id']);
 
     return $this->rich_qrcode($dataClearForm);
   }

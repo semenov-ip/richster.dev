@@ -26,29 +26,6 @@
           } }
           ?>
         </table>
-
-          
-<form action="https://rbkmoney.ru/acceptpurchase.aspx" method="POST">
-<input type="hidden" name="eshopId" value="2000000">
-<input type="hidden" name="recipientAmount" value="10">
-<input type="hidden" name="recipientCurrency" value="RUR">
-<input type="hidden" name="orderId" value="111">
-<input type="hidden" name="user_email" value="email@email.com">
-<input type="hidden" name="serviceName" value="комментарий">
-<input type="hidden" name="preference" value="bankCard">
-<input type="hidden" name="successUrl" value="http://www.example.ru">
-<input type="hidden" name="failUrl" value="http://www.example.ru">
-<input type="submit" name="button" value="оплатить">
-</form>
-
-
-
-
-
-
-
-
-          
       </div>
 
       <div class="col-md-7">
