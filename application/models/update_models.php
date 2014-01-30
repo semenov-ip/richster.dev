@@ -22,6 +22,19 @@
 
       return false;
     }
+
+    function update_set_one_where_column_setplus($dataWhereArr, $setcolumn, $setdata,  $dbTableName){
+
+      if( is_array($dataWhereArr) ){
+        $this->db->set($setcolumn, $setcolumn." + ".$setdata, FALSE);
+
+        $this->db->where($dataWhereArr);
+
+        return $this->db->update($this->prefixes.$dbTableName);
+      }
+
+      return false;
+    }
   }
 
 ?>
