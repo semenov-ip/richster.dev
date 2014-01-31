@@ -16,6 +16,7 @@
         <td>Статус</td>
         <td>Описание статуса</td>
         <td>Покупатель</td>
+        <td>Телефон покупателя</td>
         <td>Магазин</td>
         <td>Стоимость</td>
       </tr>
@@ -23,6 +24,7 @@
         echo "<tr><td>".$dataOrderObj->status_name."</td>";
         echo "<td>".$dataOrderObj->description_status_name."</td>";
         echo "<td>".$dataOrderObj->name."</td>";
+        echo "<td>".$dataOrderObj->phone."</td>";
         echo "<td>".$dataOrderObj->shop_name."</td>";
         echo "<td>".$dataOrderObj->amount." руб.</td></tr>";
       } }?>
