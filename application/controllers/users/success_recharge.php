@@ -20,7 +20,7 @@ class Success_recharge extends CI_Controller {
 
   public function index(){
     $this->load->model('update_models');
-var_dump($_POST);
+
     if( !empty($_POST) ){
       $this->validationData($_POST);
 

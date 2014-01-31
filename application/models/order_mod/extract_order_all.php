@@ -20,7 +20,7 @@ class Extract_order_all extends CI_Model{
       $this->db->join("rich_company_shop rcs", "rcs.shop_id = ro.shop_id");
 
       $query = $this->db->get();
-      
+
       if($query->num_rows() > 0){
       
         foreach ($query->result() as $row) {

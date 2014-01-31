@@ -31,7 +31,7 @@ class Shop_order extends CI_Controller{
   function rich_order($currentCompanyId){
     $this->load->model('order_mod/extract_order_all');
     $whereDataArr = array(
-      'ro.user_id' => $currentCompanyId
+      'ro.company_id' => $currentCompanyId
     );
 
     return $this->extract_order_all->extract_where_order_all($whereDataArr, __FUNCTION__);
