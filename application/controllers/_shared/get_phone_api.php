@@ -10,6 +10,11 @@ class Get_phone_api extends CI_Controller {
 
   // Добовление данных, кросбраузерный ajax запрос
   function index($hash=NULL){
+    $this->load->model('insert_models');
+
+    $addDataArr = array( 'test' => json_encode($_POST) );
+
+    $this->insert_models->insert_data_return_id($addDataArr, 'test');
 
     if(!empty($_POST)){
 

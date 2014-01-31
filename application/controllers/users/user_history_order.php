@@ -23,7 +23,7 @@ class User_history_order extends CI_Controller {
 
     $data['user'] = $this->rich_users($userDataCurrentAccunt['user_id']);
 
-    $data['account_user'] = $this->rich_account_user($userDataCurrentAccunt['user_id']);
+    $data['account_user'] = $this->rich_account_users($userDataCurrentAccunt['user_id']);
 
     $data['history_order'] = $this->rich_order($userDataCurrentAccunt['user_id']);
 
@@ -41,7 +41,7 @@ class User_history_order extends CI_Controller {
     return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
   }
 
-  function rich_account_user($user_id){
+  function rich_account_users($user_id){
     $this->load->model('extract_data');
 
     $whereDataArr = array(

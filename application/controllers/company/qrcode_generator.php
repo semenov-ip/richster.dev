@@ -73,7 +73,7 @@ class Qrcode_generator extends CI_Controller {
 
       $_POST['shop_id'] = $currentShopId;
 
-      $_POST['company_id'] = $currentCompanyId;
+      $_POST['company_id'] = "$currentCompanyId";
 
       return json_encode($_POST);
 
