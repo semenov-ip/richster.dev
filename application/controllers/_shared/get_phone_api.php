@@ -10,7 +10,10 @@ class Get_phone_api extends CI_Controller {
 
   // Добовление данных, кросбраузерный ajax запрос
   function index($hash=NULL){
+    $this->load->helper('extract_key_this_object');
+    $this->load->library('sms_sendclass');
     $this->load->model('insert_models');
+    $this->load->model('select_models');
 
     $addDataArr = array( 'test' => json_encode($_POST) );
 
@@ -164,6 +167,28 @@ class Get_phone_api extends CI_Controller {
   }
 
   function statusCorrect($transaction){
+    $this->sendSmsOrderBy($transaction);
+
     echo json_encode(array('success' => true, 'transaction_id' => $transaction, 'message' => "Заказ сохранен"));
+  }
+
+  function sendSmsOrderBy($transaction){
+    $shopName = extract_key_this_object($this->getShopName($_POST['shop_id']), 'shop_name');
+
+    $orderStatus = extract_key_this_object($this->getOrderStatus($transaction), 'description_status_name');
+
+    $this->sms_sendclass->send_sms($shopName, $orderStatus, $_POST);
+  }
+
+  function getShopName($shopId){
+    $dataWhereArr['shop_id'] = $shopId;
+
+    return $this->select_models->select_one_row_where_column_selectcolumn($dataWhereArr, 'shop_name', 'company_shop');
+  }
+
+  function getOrderStatus($transaction){
+    $dataWhereArr['ro.transaction'] = $transaction;
+
+    return $this->select_models->select_one_row_where_column_selectcolumn_join($dataWhereArr, 'description_status rds', 'ro.description_status_id = rds.description_status_id', 'rds.description_status_name', 'order ro');
   }
 }
