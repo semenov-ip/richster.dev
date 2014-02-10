@@ -13,6 +13,7 @@
       <h3 class="text-danger">Заказы компании</h3>
       <table class="table table-bordered font_size_16">
       <tr>
+        <td>Номер заказа</td>
         <td>Статус</td>
         <td>Описание статуса</td>
         <td>Покупатель</td>
@@ -21,7 +22,8 @@
         <td>Стоимость</td>
       </tr>
       <?php if(!empty($order)){ foreach ($order as $dataOrderObj) {
-        echo "<tr><td>".$dataOrderObj->status_name."</td>";
+        echo "<tr><td>".$dataOrderObj->order_num."</td>";
+        echo "<td>".$dataOrderObj->status_name."</td>";
         echo "<td>".$dataOrderObj->description_status_name."</td>";
         echo "<td>".$dataOrderObj->name."</td>";
         echo "<td>".$dataOrderObj->phone."</td>";
