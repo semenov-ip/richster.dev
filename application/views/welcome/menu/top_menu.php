@@ -1,12 +1,12 @@
-<ul class="nav nav-pills pull-right">
+<div class="topmenu">
+  <a href="#">КАК ЭТО РАБОТАЕТ</a>
 
-  <li><a href="/">Войти</a></li>
+  <a href="#">О ПРОЕКТЕ</a>
 
-  <li><a href="/welcome/welcome_registartion/">Зарегистрировать</a></li>
+  <a href="#">КОНТАКТЫ</a>
 
-  <li><a href="#">Как работает</a></li>
+  <a href="#">ДЛЯ МАГАЗИНОВ</a>
 
-  <li><a href="#">Контакты</a></li>
 
-  <li><a href="/authentication/login/">О проекте</a></li>
-</ul>
+  <!-- <a href="/welcome/welcome_registartion/">Зарегистрировать</a> -->
+</div>

@@ -1,31 +1,102 @@
 <?php
   $this->load->view('_shared/header');
 ?>
-  <body>
-
+  <body class="main">
     <div class="container">
-      <div class="header">
-        <?php $this->load->view('welcome/menu/top_menu'); ?>
-        <h3 class="text-danger">Richster</h3>
+      <?php $this->load->view('welcome/header_menu_tpl'); ?> 
+
+      <div class="row margin-t-100">
+
+        <div class="col-md-7 title_tempale">
+          <p>Ричстер позволяет делать заказы и оплачивать покупки в любом месте в любое время с телефона одним кликом!</p>
+          <p>Теперь покупать, делать заказы и контролировать финансы проще и безопастнее.</p>
+          <div class="button_downlad">
+            <a href="#">Скачать Richster</a>
+          </div>
+        </div>
+
+        <div class="col-md-4  col-sm-offset-1">
+
+          <div class="jumbotron jumbotron_authorization">
+            <div class="row">
+              <div class="col-md-3 text_a_l">Войти</div>
+              <div class="col-md-9 text_a_r">или <a href="/welcome/welcome_registartion/"> создать аккаунт</a></div>
+            </div>
+            <div class="row">
+              
+            <form class="form-horizontal" method="POST">
+
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <input type="email" name="email" class="form-control" placeholder="Адрес электронной почты">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <input type="password" name="password" class="form-control" placeholder="Пароль">
+                </div>
+              </div>
+
+              <div class="form-group float_l margin-l-15">
+                <label>
+                  <input type="checkbox"> Запомнить
+                </label>
+              </div>
+
+              <div class="form-group float_r">
+                <div class="col-sm-6">
+                  <div class="button_entry"><a href="javascript:void(0);" onclick="formSubmit(this);">Войти</a></div>
+                </div>
+              </div>
+
+            </form>
+            </div>
+            <div class="row password_remember">
+              <div class="col-md-9 text_a_l" style="margin-top: -16px;"><a href="#">Забыли пароль?</a></div>
+              <div class="col-md-3 text_a_r">&nbsp;</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="jumbotron">
+      <div class="row margin-t-50">
+        <div class="col-md-1 cow"></div>
+        <div class="col-md-5 cow">
+          * Вы сможетет купить эту корову одним кликом
+          <img width="360" src="/images/cow.png" />
+        </div>
 
-        <p><a class="btn btn-lg btn-success" href="/welcome/welcome_registartion/" role="button">Зарегестрироваться</a></p>
+        <div class="col-md-1">
+        </div>
 
-        <form class="form-signin" method="POST">
-          <h2 class="form-signin-heading">Вход в систему</h2>
-          <input type="text" name="email" class="form-control" placeholder="Email address" required autofocus>
-          <input type="password" name="password" class="form-control" placeholder="Password" required>
-          <input type="submit" class="btn btn-lg btn-primary btn-block" value="Войти">
-        </form>
-      
+         <div class="col-md-5 title_tempale">
+          <img width="180" src="/images/phone_cow.png" />
+        </div>
       </div>
 
-      <div class="footer">
-        <p>&copy; Company 2013</p>
+      <div class="row margin-t-50">
+        <div class="col-md-7 title_shop">
+          <h3>ДЛЯ МАГАЗИНОВ</h3>
+          <ul class="templae_shop">
+            <li>Продовайте свои товары или услуги с любых носителей</li>
+            <li>Забудьте про корзину! Увеличте конверсию в 10 раз</li>
+            <li>Теперь любые изображения способны продовать</li>
+            <li>Лояльность покупателей теперь дело техники</li>
+            <li>Ваши покупатели могут даже не заходить на Ваш сайт</li>
+          </ul>
+          
+          <div class="button">
+            <a href="/welcome/welcome_registartion/">Зарегестрировать магазин</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+        </div>
       </div>
 
+      <?php $this->load->view('welcome/footer_phone_tpl'); ?>
     </div>
+
+    <?php $this->load->view('welcome/footer_tpl'); ?>
   </body>
 </html>

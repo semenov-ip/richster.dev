@@ -305,7 +305,11 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v7/cJZKeOuBrn4kERxqtaUH3bO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+  font-style:condensed;
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
@@ -329,7 +333,7 @@ a {
 a:hover,
 a:focus {
   color: #2a6496;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a:focus {
@@ -1866,7 +1870,7 @@ legend {
 label {
   display: inline-block;
   margin-bottom: 5px;
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 
 input[type="search"] {

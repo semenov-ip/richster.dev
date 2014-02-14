@@ -27,31 +27,38 @@ class Qrcode_generator extends CI_Controller {
   }
 
   public function index($currentShopId){
+    $this->load->model('select_models');
 
     $companyDataCurrent = $this->session->userdata('users');
 
-    $this->qrcodeGeneratePages($companyDataCurrent['user_id'], $currentShopId);
+    $shopDataObj = $this->getShopDataObj($currentShopId);
+
+    $this->qrcodeGeneratePages($companyDataCurrent['user_id'], $shopDataObj);
 
     $data['header'] = $this->headerArr;
 
     $this->load->view('company/qrcode_generator_tpl', $data);
   }
 
-  function qrcodeGeneratePages($currentCompanyId, $currentShopId){
+  function getShopDataObj($currentShopId){
+    return $this->select_models->select_one_row_where_column_selectcolumn( array('shop_id' => $currentShopId), 'shop_id, shop_name', 'company_shop');
+  }
+
+  function qrcodeGeneratePages($currentCompanyId, $shopDataObj){
     $this->load->helper('phpqrcode/qrlib');
 
     $PNG_TEMP_DIR = './qrcode_img/';
 
     $PNG_WEB_DIR = 'qrcode_img/';
 
-    $filename = $PNG_TEMP_DIR.time().'_'.$currentCompanyId.'_'.$currentShopId.'_qrcode.png';
+    $filename = $PNG_TEMP_DIR.time().'_'.$currentCompanyId.'_'.$shopDataObj->shop_id.'_qrcode.png';
 
-    $dataPostFormQrJson = $this->extratcPostDataFormJson($currentCompanyId, $currentShopId);
+    $dataPostFormQrJson = $this->extratcPostDataFormJson($currentCompanyId, $shopDataObj);
 
     if(!$dataPostFormQrJson){ return false; }
 
     QRcode::png($dataPostFormQrJson, $filename, $this->errorCorrectionLevel, $this->matrixPointSize, 2);
-    
+
     $idQrCurrentCode = $this->dbSaveImgQrCode($PNG_WEB_DIR.basename($filename), $dataPostFormQrJson);
 
     if($idQrCurrentCode){
@@ -59,7 +66,7 @@ class Qrcode_generator extends CI_Controller {
     }
   }
 
-  function extratcPostDataFormJson($currentCompanyId, $currentShopId){
+  function extratcPostDataFormJson($currentCompanyId, $shopDataObj){
     if(!empty($_POST)){
       foreach ($_POST as $key => $value) {
         $_POST[$key] = trim($value);
@@ -71,7 +78,9 @@ class Qrcode_generator extends CI_Controller {
       $this->matrixPointSize = $_POST['size'];
       unset($_POST['size']);
 
-      $_POST['shop_id'] = $currentShopId;
+      $_POST['shop_id'] = $shopDataObj->shop_id;
+
+      $_POST['shop_name'] = $shopDataObj->shop_name;
 
       $_POST['company_id'] = "$currentCompanyId";
 
@@ -85,8 +94,10 @@ class Qrcode_generator extends CI_Controller {
   function dbSaveImgQrCode($img, $jsonDataForm){
     $dataForm = json_decode($jsonDataForm);
 
+    unset($dataForm->shop_name);
+
     foreach ($dataForm as $key => $value) {      
-      
+
       $dataClearForm[$key] = trim($value);
 
     }

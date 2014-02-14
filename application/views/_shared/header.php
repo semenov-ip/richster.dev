@@ -3,6 +3,7 @@
 <head>
   <title>Richster</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:Condensed" />
   <?php
     foreach( $header['css'] as $css ){
       echo '<link rel="stylesheet" type="text/css" href="/css/'.$css.'" />';
