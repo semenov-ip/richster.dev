@@ -1,0 +1,369 @@
+.main {
+  background: url('/images/background.jpg') center top no-repeat;
+}
+.logo{
+  background: url('/images/logo.png') center top no-repeat;
+}
+
+.white_bacground{
+  background: url('/images/white_bacground.png') center top no-repeat;
+}
+
+a.logo {
+  width: 230px;
+  display: inline-block;
+  height: 56px;
+  background: url('/images/logo.png') left top no-repeat;
+  margin: 20px 0 0 0px;
+}
+
+.form-horizontal .control-label{
+  font-size: 0.8em;
+  font-weight: normal;
+  padding-top: 0px;
+}
+
+.text_left{
+  text-align: left;
+}
+.text_right{
+  text-align: right;
+}
+
+.font_size_16{
+  font-size: 16px;
+}
+.font-s-20{
+  font-size: 20px;
+}
+
+.btn-none .btn{
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.new-style{
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.new-style textarea{
+  font-size: 14px;
+}
+
+.topmenu {
+  display: inline-block;
+  float: right;
+  margin-top: 50px;
+}
+
+.topmenu a{
+  text-decoration: none;
+  color: #ffffff;
+  margin-left: 20px;
+}
+
+.topmenu_user{
+  display: inline-block;
+  margin-top: 50px;
+}
+
+.topmenu_user a{
+  text-decoration: none;
+  color: #ffffff;
+  margin-left: 20px;
+}
+
+.topmenu_name {
+  float: right;
+  margin-top: 50px;
+  text-transform: uppercase;
+}
+
+.topmenu_name a{
+  text-decoration: none;
+  color: #ffffff;
+  margin-left: 20px;
+}
+
+.title_tempale p {
+  color: #ffffff;
+  font-size: 20px;
+}
+.
+.margin-t-25 {
+  margin-top: 25px;
+}
+
+.margin-t-50{
+  margin-top: 50px;
+}
+
+.margin-t-100{
+  margin-top: 100px;
+}
+
+.margin-t-300 {
+  margin-top: 300px;
+}
+.margin-t-50{
+  margin-top: 50px
+}
+
+.margin-top-14 {
+  margin-top: 14px;
+}
+
+.padding-top-12 {
+  padding-top: 12px;
+}
+
+.margin-bottom-50 {
+  margin-bottom: 50px;
+}
+
+
+.margin-0{
+  margin:0;
+}
+
+.margin-b-80{
+  margin-bottom: 80px;
+}
+
+.padding-left-25 {
+  padding-left: 25px;
+}
+
+.float_l{
+  float: left;
+}
+.float_r{
+  float: right;
+}
+.text_a_l {
+  text-align: left;
+}
+
+.text_a_r {
+  text-align: right;
+}
+
+.jumbotron_authorization .form-horizontal .margin-l-15{
+  margin-left: 15px;
+}
+
+.jumbotron_authorization .form-horizontal .margin-r-20{
+  margin-right: 20px;
+}
+
+.row .jumbotron_authorization{
+  background-color: #ffffff;
+  margin: 0;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+  font-size: 16px;
+  color: #888888;
+}
+
+.jumbotron .btn {
+  font-size: 16px;
+  padding: 4px 14px;
+  font-weight: normal;
+}
+
+.jumbotron_authorization .form-signin {
+  max-width: 600px;
+}
+
+.jumbotron_authorization .form-group{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.jumbotron_reg .col-md-10{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.container .jumbotron_reg {
+  max-width: 370px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 20px;
+  padding-bottom: 0px;
+  font-size: 16px;
+  color: #888888;
+}
+
+.jumbotron_reg .text_a_l{
+  padding-left: 20px;
+}
+
+.jumbotron_reg .text_a_r{
+  padding-right: 20px;
+}
+
+.container .jumbotron_user{
+  max-width: 420px;
+  background-color: #ffffff;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  font-size: 16px;
+  color: #888888;
+}
+
+
+.cow {
+  font-size: 30px;
+  color: #1a75af;
+}
+
+.footer {
+  background-color: #1d5d8e;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 25px;
+  padding: 0px 0px 0px 0px;
+}
+
+.decor {
+  background: url(/images/phone_footer.png) no-repeat 0 0;
+  height: 270px;
+}
+
+.applestore{
+  background: url(/images/applestore.png) no-repeat 0 0;
+  height: 45px;
+  background-size: 140px;
+  background-position: 30px;
+}
+
+.setting_footer{
+  padding: 0;
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: 100px;
+}
+.line_punkt{
+  background: url(/images/line_punkt.png) no-repeat 0 0;
+  width: 190px;
+  height: 16px;
+  margin-left: 10px;
+}
+
+.phone_footer{
+  background: url(/images/phone_footer_small.png) no-repeat 0 0;
+  height: 47px;
+  margin-left: 8px
+}
+
+.templae_shop {
+  padding-left: 0px;
+  color: #ffffff;
+}
+.templae_shop li {
+  list-style: none;
+  line-height: 2em;
+  font-size: 18px;
+  padding-left: 2em;
+  background: url(/images/li_ok_white.png) 0 50% no-repeat;
+}
+.title_shop h3{
+  color: #ffffff;
+  font-weight: normal;
+}
+
+.button a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  float: left;
+  width: 335px;
+  height: 45px;
+  background: url('/images/buttom_reg.png') left top no-repeat;
+  padding: 7px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.button a:hover, .button a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration: none;
+}
+
+.button_downlad a{
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  float: left;
+  width: 253px;
+  height: 45px;
+  background: url('/images/buttom_downlad.png') left top no-repeat;
+  padding: 7px;
+  font-size: 20px;
+  padding-left: 28px;
+}
+
+.button_downlad a:hover, .button_downlad a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration: none;
+}
+
+.button_entry a{
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  width: 112px;
+  height: 37px;
+  background: url('/images/buttom_send.png') left top no-repeat;
+  padding: 0px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.button_entry a:hover, .button_entry a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration: none;
+}
+
+.grenlink:hover, .grenlink:focus {
+  color: #90d812;
+}
+
+.grenlink {
+  color: #90d812;
+}
+
+.password_remember{
+  margin-top: -30px;
+  height: 50px;
+}
+
+.featurette-heading{
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.arrow{
+  text-align: center;
+  margin-top: -1px;
+}
+
+.arrow_down {
+  text-align: center;
+  margin-bottom: -20px;
+}
+
+.table_settings{
+  color: #ffffff;
+}
