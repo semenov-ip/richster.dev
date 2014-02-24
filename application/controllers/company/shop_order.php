@@ -19,21 +19,37 @@ class Shop_order extends CI_Controller{
   }
 
   public function index(){
+    $this->load->library('get_total_summ');
+    $this->load->model('extract_data');
+    $this->load->model('select_models');
+    $this->load->model('order_mod/extract_order_all');
+
     $companyDataCurrent = $this->session->userdata('users');
+
+    $data['user'] = $this->rich_users($companyDataCurrent['user_id']);
 
     $data['order'] = $this->rich_order($companyDataCurrent['user_id']);
 
     $data['header'] = $this->headerArr;
 
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+
     $this->load->view('company/shop_order_tpl', $data);
   }
 
+  function rich_users($user_id){
+    $whereDataArr = array(
+      'user_id' => $user_id
+    );
+
+    return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
+  }
+
   function rich_order($currentCompanyId){
-    $this->load->model('order_mod/extract_order_all');
     $whereDataArr = array(
       'ro.company_id' => $currentCompanyId
     );
 
-    return $this->extract_order_all->extract_where_order_all($whereDataArr, __FUNCTION__);
+    return $this->extract_order_all->extract_where_order_all($whereDataArr, __FUNCTION__, 20);
   }
 }

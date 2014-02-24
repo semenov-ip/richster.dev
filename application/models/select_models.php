@@ -128,6 +128,29 @@
       return false;
     }
 
+    function select_data_summ($dataWhereArr, $select_sum, $dbTableName){
+      if( is_array($dataWhereArr) ){
+
+        $this->db->select_sum($select_sum);
+
+        $this->db->where($dataWhereArr);
+
+        $query = $this->db->get($this->prefixes.$dbTableName);
+
+        if($query->num_rows() > 0){
+
+          foreach ($query->result_array() as $row) {
+
+            foreach ($row as $key => $value) { if(is_null($row[$key])){ $row[$key] = "0"; } }
+
+            return $row;
+          }
+        }
+      }
+
+      return false;
+    }
+
   }
 
 ?>

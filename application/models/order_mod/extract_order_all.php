@@ -6,11 +6,13 @@ class Extract_order_all extends CI_Model{
     parent::__construct();
   }
 
-  function extract_where_order_all($whereDataArr, $dbNameFunction){
+  function extract_where_order_all($whereDataArr, $dbNameFunction, $limit = false){
     if(is_array($whereDataArr)){
       
       $this->db->select('ro.order_id, ro.order_num, ro.shop_id, ro.user_id, ro.amount, ros.status_name, rds.description_status_name, ru.name, rcs.shop_name, ru.phone');
       $this->db->from($dbNameFunction." ro");
+
+      if($limit){ $this->db->limit($limit); }
 
       $this->db->where($whereDataArr);
 

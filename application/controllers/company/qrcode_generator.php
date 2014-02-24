@@ -27,17 +27,31 @@ class Qrcode_generator extends CI_Controller {
   }
 
   public function index($currentShopId){
+    $this->load->library('get_total_summ');
+    $this->load->model('extract_data');
     $this->load->model('select_models');
 
     $companyDataCurrent = $this->session->userdata('users');
+
+    $data['user'] = $this->rich_users($companyDataCurrent['user_id']);
 
     $shopDataObj = $this->getShopDataObj($currentShopId);
 
     $this->qrcodeGeneratePages($companyDataCurrent['user_id'], $shopDataObj);
 
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+
     $data['header'] = $this->headerArr;
 
     $this->load->view('company/qrcode_generator_tpl', $data);
+  }
+
+  function rich_users($user_id){
+    $whereDataArr = array(
+      'user_id' => $user_id
+    );
+
+    return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
   }
 
   function getShopDataObj($currentShopId){
@@ -114,20 +128,29 @@ class Qrcode_generator extends CI_Controller {
   }
 
   function rich_qrcode($dataDbAdd){
-    
+
     $this->load->model('insert_data_this_function_mod');
-    
+
     return $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
   }
 
   function view($idQrCurrentCode){
+    $this->load->library('get_total_summ');
     $this->load->model('extract_data');
+    $this->load->model('select_models');
+
     $whereDataArr = array(
       'qrcode_id' => $idQrCurrentCode
     );
-    
+
     $data['qrcode'] = $this->extract_data->extract_where_one($whereDataArr, 'rich_qrcode');
-    
+
+    $companyDataCurrent = $this->session->userdata('users');
+
+    $data['user'] = $this->rich_users($companyDataCurrent['user_id']);
+
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+
     $data['header'] = $this->headerArr;
 
     $this->load->view('company/qrcode_view_tpl', $data);

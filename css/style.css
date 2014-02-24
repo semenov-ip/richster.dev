@@ -5,6 +5,10 @@
   background: url('/images/logo.png') center top no-repeat;
 }
 
+.white_bacground{
+  background: url('/images/white_bacground.png') center top no-repeat;
+}
+
 a.logo {
   width: 230px;
   display: inline-block;
@@ -26,9 +30,17 @@ a.logo {
   text-align: right;
 }
 
+.text_c{
+  text-align: center;
+}
+
 .font_size_16{
   font-size: 16px;
 }
+.font-s-20{
+  font-size: 20px;
+}
+
 .btn-none .btn{
   padding: 5px 10px;
   font-size: 12px;
@@ -55,9 +67,36 @@ a.logo {
   margin-left: 20px;
 }
 
+.topmenu_user{
+  display: inline-block;
+  margin-top: 50px;
+}
+
+.topmenu_user a{
+  text-decoration: none;
+  color: #ffffff;
+  margin-left: 20px;
+}
+
+.topmenu_name {
+  float: right;
+  margin-top: 50px;
+  text-transform: uppercase;
+}
+
+.topmenu_name a{
+  text-decoration: none;
+  color: #ffffff;
+  margin-left: 20px;
+}
+
 .title_tempale p {
   color: #ffffff;
   font-size: 20px;
+}
+.
+.margin-t-25 {
+  margin-top: 25px;
 }
 
 .margin-t-50{
@@ -75,8 +114,29 @@ a.logo {
   margin-top: 50px
 }
 
+.margin-top-14 {
+  margin-top: 14px;
+}
+
+.padding-top-12 {
+  padding-top: 12px;
+}
+
+.margin-bottom-50 {
+  margin-bottom: 50px;
+}
+
+
 .margin-0{
   margin:0;
+}
+
+.margin-b-80{
+  margin-bottom: 80px;
+}
+
+.padding-left-25 {
+  padding-left: 25px;
 }
 
 .float_l{
@@ -92,16 +152,6 @@ a.logo {
 .text_a_r {
   text-align: right;
 }
-
-
-
-
-
-
-
-
-
-
 
 .jumbotron_authorization .form-horizontal .margin-l-15{
   margin-left: 15px;
@@ -162,9 +212,34 @@ a.logo {
   padding-right: 20px;
 }
 
+.container .jumbotron_user{
+  max-width: 420px;
+  background-color: #ffffff;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  font-size: 16px;
+  color: #888888;
+}
 
-.cow{
+.container .jumbotron_order{
+  background-color: #ffffff;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: 2px;
+  font-size: 16px;
+  color: #888888;
+}
+
+.jumbotron_order h2{
+  color: #888888;
+}
+
+.cow {
   font-size: 30px;
+  color: #1a75af;
 }
 
 .footer {
@@ -172,7 +247,7 @@ a.logo {
   color: #ffffff;
   font-size: 14px;
   line-height: 25px;
-  padding: 10px 0px 9px 0px;
+  padding: 0px 0px 0px 0px;
 }
 
 .decor {
@@ -180,17 +255,31 @@ a.logo {
   height: 270px;
 }
 
+.applestore{
+  background: url(/images/applestore.png) no-repeat 0 0;
+  height: 45px;
+  background-size: 140px;
+  background-position: 30px;
+}
+
 .setting_footer{
   padding: 0;
   font-size: 20px;
   color: #ffffff;
+  margin-top: 100px;
 }
 .line_punkt{
   background: url(/images/line_punkt.png) no-repeat 0 0;
   width: 190px;
+  height: 16px;
   margin-left: 10px;
 }
 
+.phone_footer{
+  background: url(/images/phone_footer_small.png) no-repeat 0 0;
+  height: 47px;
+  margin-left: 8px
+}
 
 .templae_shop {
   padding-left: 0px;
@@ -255,6 +344,7 @@ a.logo {
   background: url('/images/buttom_send.png') left top no-repeat;
   padding: 0px;
   font-size: 16px;
+  text-align: center;
 }
 
 .button_entry a:hover, .button_entry a:focus {
@@ -262,7 +352,35 @@ a.logo {
   text-decoration: underline;
   text-decoration: none;
 }
+
+.grenlink:hover, .grenlink:focus {
+  color: #90d812;
+}
+
+.grenlink {
+  color: #90d812;
+}
+
 .password_remember{
   margin-top: -30px;
   height: 50px;
+}
+
+.featurette-heading{
+  font-size: 24px;
+  color: #ffffff;
+}
+
+.arrow{
+  text-align: center;
+  margin-top: -1px;
+}
+
+.arrow_down {
+  text-align: center;
+  margin-bottom: -20px;
+}
+
+.table_settings{
+  color: #ffffff;
 }

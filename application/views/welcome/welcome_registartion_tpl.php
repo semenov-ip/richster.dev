@@ -5,7 +5,7 @@
 
   <div class="container">
     
-    <?php $this->load->view('welcome/header_menu_tpl'); ?>
+    <?php $this->load->view('welcome/menu/top_menu'); ?>
 
     <div class="row margin-t-100">
 
@@ -58,7 +58,7 @@
               </div>
 
               <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-md-10 col-md-offset-1">
                   <label>
                     <input type="checkbox" checked="checked" disabled="disabled"> Я принимаю <a href="#">условия регистрации</a>
                   </label>
@@ -77,10 +77,10 @@
       </div>
 
     </div>
-    <?php $this->load->view('welcome/footer_phone_tpl'); ?>
+    <?php $this->load->view('_shared/footer_phone_tpl'); ?>
   </div>
 
-  <?php $this->load->view('welcome/footer_tpl'); ?>
+  <?php $this->load->view('_shared/footer_tpl'); ?>
 
   </body>
 </html>
