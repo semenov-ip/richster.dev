@@ -384,3 +384,22 @@ a.logo {
 .table_settings{
   color: #ffffff;
 }
+.balance-green{
+  font-size: 18px;
+  color: #94d91e;
+}
+.popover-inner{
+  color: #888888;
+}
+.hr-balance{
+  margin: 10px 0;
+}
+
+.error_msg{
+  width: 89%;
+  margin: 0 auto;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 16px;
+}

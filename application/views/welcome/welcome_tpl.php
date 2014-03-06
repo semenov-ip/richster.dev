@@ -23,9 +23,9 @@
                 <div class="col-md-9 text_a_r">или <a href="/welcome/welcome_registartion/"> создать аккаунт</a></div>
               </div>
               <div class="row">
-                
-              <form class="form-horizontal" method="POST">
 
+              <form class="form-horizontal" method="POST">
+              <?php if($error){ echo '<div class="error_msg alert '.$error['class'].'">'.$error['text'].'</div>'; } ?>
                 <div class="form-group">
                   <div class="col-sm-12">
                     <input type="email" name="email" class="form-control" placeholder="Адрес электронной почты">
@@ -61,7 +61,6 @@
         </div>
       </div>
     </div>
-
 
     <div class="white_bacground">
       <div class="container">
@@ -107,7 +106,7 @@
               <li>Лояльность покупателей теперь дело техники</li>
               <li>Ваши покупатели могут даже не заходить на Ваш сайт</li>
             </ul>
-            
+
             <div class="button">
               <a href="/welcome/welcome_registartion/">Зарегестрировать магазин</a>
             </div>

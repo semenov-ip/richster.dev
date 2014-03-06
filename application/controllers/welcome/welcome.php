@@ -3,6 +3,8 @@
 class Welcome extends CI_Controller {
   private $headerArr;
 
+  public $userIdHash;
+
   function __construct(){
     /*
      * Определяем основные параметры heder - заголовков
@@ -23,38 +25,36 @@ class Welcome extends CI_Controller {
   }
 
   function index(){
-    $data['error'] = $this->checkLogin();
+    $this->load->helper('execute_trim_empty_form');
+    $this->load->helper('extract_key_this_array');
+    $this->load->library('welcome/validation_data_authentication');
+    $this->load->model('select_models');
+    
+    $data['error'] = extract_key_this_array( $this->config->item('error_message'), $this->getPostDataAuthentication() );
 
     $data['header'] = $this->headerArr;
 
     $this->load->view('welcome/welcome_tpl', $data);
   }
 
-  function checkLogin(){
-    if(isset($_POST['email'])){
-      $email = trim($_POST['email']);
+  function getPostDataAuthentication(){
+    if(!empty($_POST)){
 
-      $this->rich_users($email);
+      $submitStatus = $this->validation_data_authentication->getCorrectData();
+
+      if( $submitStatus !== true ){ return $submitStatus; }
+
+      $this->successfullyAuthentication();
+
     }
+
+    return false;
   }
 
-  function rich_users($email){
-    $dataUserLogin = array (
-      'email' => $email,
-      'password' => md5($email.trim($_POST['password']))
-    );
+  function successfullyAuthentication(){
 
-    $this->load->model('check_user/check_user_mod');
+    $this->session->set_userdata( array('users' => $this->userIdHash) );
 
-    $result = $this->check_user_mod->checkData( $dataUserLogin, __FUNCTION__, 'user_id, hash' );
-
-    if(is_array($result)){
-
-      $this->session->set_userdata( array('users' => $result) );
-
-      redirect( "/_shared/user_distributor/", 'location');
-    }
-
-    return "Данные введены не корректно";
+    redirect( "/_shared/user_distributor/", 'location');
   }
 }

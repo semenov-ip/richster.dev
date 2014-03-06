@@ -1,19 +1,3 @@
-
-
-<a href="#" id="blob" class="btn large primary" rel="popover">hover for popover</a>
-
-
-<script>
-var img = '<img src="https://si0.twimg.com/a/1339639284/images/three_circles/twitter-bird-white-on-blue.png" />';
-
-$("#blob").popover({ title: 'Look! A bird!', content: img, html:true });​​​
-</script>
-
-
-
-
-
-
 <div class="header">
   <div class="float_l">
     <a class="logo"></a>
@@ -31,14 +15,7 @@ $("#blob").popover({ title: 'Look! A bird!', content: img, html:true });​​�
   </div>
   
   <div class="topmenu_name">
-    <a id="userName" href="#"><?php echo $user->name; ?></a>
+    <a data-toggle="popover" data-placement="bottom" data-content="Баланс: <span class='balance-green'><?php echo $totalSumm; ?></span><br /><a href='#'>Пополнить баланс</a><br /><hr class='hr-balance' /><a href='/_shared/log_out/'>Выход</a>" id="userName" title='' href="#"><?php echo $user->name; ?></a>
   </div>
 
-</div>
-
-<div class="hidden">
-  <div id="userNameBlock">
-    Баланс: <?php echo $totalSumm; ?> руб.
-    <a href="/_shared/log_out/">Выход</a>
-  </div>
 </div>

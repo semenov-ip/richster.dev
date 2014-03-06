@@ -19,62 +19,60 @@ class Welcome_registartion extends CI_Controller{
   }
 
   function index(){
-    $this->getPostDataRegistration();    
+    $this->load->helper('extract_key_this_array');
+    $this->load->helper('execute_trim_empty_form');
+    $this->load->library('welcome/validation_data_registration');
+    $this->load->model('select_models');
+    $this->load->model('insert_models');
+
+    $data['error'] = extract_key_this_array($this->config->item('error_message'), $this->getPostDataRegistration());
+
+    $data['userDataObj'] = empty($_POST) ? (object)$this->getUserData() : (object)$_POST;
 
     $data['header'] = $this->headerArr;
 
     $this->load->view( 'welcome/welcome_registartion_tpl', $data );
   }
 
-  function getPostDataRegistration(){
-    if(!empty($_POST)){
-      
-      foreach ($_POST as $key => $value) {
-        $_POST[$key] = trim($value);
-        if( empty($_POST[$key]) ){
-          return false;
-        }
-      }
-
-      if( !$this->passwordConfirm($_POST) ) return false;
-
-      unset($_POST['password_confirm']);
-
-      $_POST['password'] = md5($_POST['email'].$_POST['password']);
-
-      $_POST['dataadd'] = $this->config->item('date');
-
-      $_POST['hash'] = md5($_POST['email'].$_POST['password'].$_POST['dataadd']);
-
-      $dataUserId = $this->rich_users($_POST);
-
-      if($dataUserId){
-
-        $functionName = "rich_account_".$_POST['type_user'];
-
-        $this->$functionName($dataUserId, $_POST['phone'], $_POST['hash']);
-      }
-    }
+  function getUserData(){
+    return $this->select_models->show_columns('users');
   }
 
-  function passwordConfirm($post){
-    if($post['password'] === $post['password_confirm']){
-      return true;
+  function getPostDataRegistration(){
+    if(!empty($_POST)){
+
+      $submitStatus = $this->validation_data_registration->getCorrectData();
+
+      if( $submitStatus !== true ){ return $submitStatus; }
+
+      $this->saveDataCollectionUserRegistration();
     }
+
     return false;
   }
 
-  function rich_users($dataDbAdd){
-    $this->load->model('insert_data_this_function_mod');
-    
-    return $this->insert_data_this_function_mod->insert_return_id($dataDbAdd, __FUNCTION__);
+  function saveDataCollectionUserRegistration(){
+    $_POST['password'] = md5($_POST['email'].$_POST['password']);
+
+    $_POST['dataadd'] = $this->config->item('date');
+
+    $_POST['hash'] = md5($_POST['email'].$_POST['password'].$_POST['dataadd']);
+
+    $userId = $this->insert_models->insert_data_return_id($_POST, 'users');
+
+    if($userId){
+
+      $functionName = "rich_account_".$_POST['type_user'];
+
+      $this->$functionName($userId, $_POST['phone'], $_POST['hash']);
+    }
   }
 
-  function rich_account_users($idUser, $phone_user, $hash){
+  function rich_account_users($userId, $phone_user, $hash){
     $this->load->model('insert_data_this_function_mod');
     
     $dataDbAdd = array(
-      'user_id' => $idUser,
+      'user_id' => $userId,
       'account_type_id' => 5,
       'account_name' => 'Ричстер',
       'account_number' => intval($phone_user),
@@ -85,15 +83,15 @@ class Welcome_registartion extends CI_Controller{
 
     if($queryStatus){
 
-      $this->saveSessionCurentUsers($idUser, $hash);
+      $this->saveSessionCurentUsers($userId, $hash);
     }
   }
 
-  function rich_account_company($idUser, $phone_company, $hash){
+  function rich_account_company($userId, $phone_company, $hash){
     $this->load->model('insert_data_this_function_mod');
-    
+
     $dataDbAdd = array(
-      'user_id' => $idUser,
+      'user_id' => $userId,
       'account_type_id' => 5,
       'account_company_name' => 'Ричстер',
       'account_company_number' => intval($phone_company),
@@ -103,12 +101,12 @@ class Welcome_registartion extends CI_Controller{
     $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
 
     if($queryStatus){
-      $this->saveSessionCurentUsers($idUser, $hash);
+      $this->saveSessionCurentUsers($userId, $hash);
     }
   }
 
-  function saveSessionCurentUsers($idUser, $hash){
-    $this->session->set_userdata( array('users' => array('hash' => $hash, 'user_id' => $idUser)) );
+  function saveSessionCurentUsers($userId, $hash){
+    $this->session->set_userdata( array('users' => array('hash' => $hash, 'user_id' => $userId)) );
 
     redirect( "/_shared/user_distributor/", 'location'); 
   }

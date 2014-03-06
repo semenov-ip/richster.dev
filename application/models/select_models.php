@@ -56,6 +56,29 @@
       return false;
     }
 
+    function select_one_row_where_column_selectcolumn_result_array($dataWhereArr, $selectcolumn, $dbTableName){
+      if(is_array($dataWhereArr)){
+
+        $this->db->select($selectcolumn);
+
+        $this->db->where($dataWhereArr);
+
+        $query = $this->db->get($this->prefixes.$dbTableName);
+
+        if($query->num_rows() == 1){
+
+          foreach ($query->result_array() as $row) {
+
+            return $row;
+          }
+
+        }
+
+      }
+
+      return false;
+    }
+
     function select_all_row_where_column($dataWhereArr, $dbTableName){
 
       if(is_array($dataWhereArr)){
@@ -150,6 +173,28 @@
 
       return false;
     }
+
+    function show_columns($dbTableName){
+
+      $fields = $this->db->list_fields($this->prefixes.$dbTableName);
+
+      foreach ($fields as $field) {
+        $row[$field] = null;
+      }
+
+      return $row;
+    }
+
+    function show_columns_return_default($dbTableName){
+      $fields = $this->db->field_data($this->prefixes.$dbTableName);
+
+      foreach ($fields as $field){
+        $row[$field->name] = $field->default;
+      }
+
+      return $row;
+    }
+
 
   }
 

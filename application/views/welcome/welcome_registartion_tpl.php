@@ -18,21 +18,22 @@
 
           <div class="row">
             <form class="form-horizontal" role="form" method="post">
+            <?php if($error){ echo '<div class="error_msg alert '.$error['class'].'">'.$error['text'].'</div>'; } ?>
               <div class="form-group">
                 <div class="col-md-10 col-md-offset-1">
-                  <input type="text" name="name" class="form-control" placeholder="Ваше имя">
+                  <input type="text" name="name" class="form-control" value="<?php echo $userDataObj->name; ?>" placeholder="Ваше имя">
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-md-10 col-md-offset-1">
-                  <input type="text" name="phone" class="form-control" placeholder="Телефон">
+                  <input type="text" name="phone" class="form-control" value="<?php echo $userDataObj->phone; ?>" placeholder="Телефон">
                 </div>
               </div>
 
               <div class="form-group">
                 <div class="col-md-10 col-md-offset-1">
-                  <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Адрес электронной почты">
+                  <input type="email" name="email" class="form-control" value="<?php echo $userDataObj->email; ?>" id="inputEmail3" placeholder="Адрес электронной почты">
                 </div>
               </div>
               
@@ -50,7 +51,7 @@
                   <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Пароль">
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <div class="col-md-10 col-md-offset-1">
                   <input type="password" name="password_confirm" class="form-control" id="inputPassword3" placeholder="Повторите пароль">
