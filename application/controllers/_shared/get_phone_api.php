@@ -4,8 +4,8 @@ class Get_phone_api extends CI_Controller {
 
   function __construct(){
     parent::__construct();
-//!!!!!!!!!!!    
-    //header('Content-type: text/json');
+ 
+    header('Content-type: text/json');
   }
 
   // Добовление данных, кросбраузерный ajax запрос
@@ -16,9 +16,6 @@ class Get_phone_api extends CI_Controller {
     $this->load->model('select_models');
     $this->load->model('extract_data');
 
-//!!!!!!!!!!
-    $_POST = array( "amount" => "100", "company_id" => "17", "order_num" => "123", "shop_id" => "6", "user_id" => "15" );
-
     $addDataArr = array( 'test' => json_encode($_POST) );
 
     $this->insert_models->insert_data_return_id($addDataArr, 'test');
@@ -26,7 +23,7 @@ class Get_phone_api extends CI_Controller {
     if(!empty($_POST)){
 
       $hash_str = md5(json_encode($_POST));
-echo $hash_str;
+
       if($hash_str == $hash){
 
         if ( !$this->searchCurrentUser($_POST['user_id']) ) return $this->statusIncorect('Отказ. Пользователь не зарегистрирован в системе.');
