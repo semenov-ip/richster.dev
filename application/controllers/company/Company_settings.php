@@ -27,13 +27,13 @@ class Company_settings extends CI_Controller {
 
     $data['user'] = $this->rich_users($companyDataCurrent['user_id']);
 
-    $data['account_company'] = $this->rich_account_company($companyDataCurrent['user_id']);
+    $data['account_company'] = $this->rich_account($companyDataCurrent['user_id']);
 
     $data['company_shop'] = $this->rich_company_shop($companyDataCurrent['user_id']);
 
     $data['header'] = $this->headerArr;
 
-    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'count_money', 'account');
 
     $this->load->view('company/company_settings_tpl', $data);
   }
@@ -46,7 +46,7 @@ class Company_settings extends CI_Controller {
     return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
   }
 
-  function rich_account_company($user_id){
+  function rich_account($user_id){
     $this->load->model('extract_data');
     $whereDataArr = array(
       'user_id' => $user_id

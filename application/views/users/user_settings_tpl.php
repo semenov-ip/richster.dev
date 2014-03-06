@@ -22,9 +22,9 @@
               <td></td>
               <td></td>
             </tr>
-            <?php if(!empty($account_user)){ foreach ($account_user as $accountUserObj) {
-                echo "<tr><td>".$accountUserObj->account_number."</td>";
-                echo "<td>".$accountUserObj->account_balance." руб.</td>";
+            <?php if(!empty($userAccountObj)){ foreach ($userAccountObj as $accountUserObj) {
+                echo "<tr><td>".$accountUserObj->purse_number."</td>";
+                echo "<td>".$accountUserObj->count_money." руб.</td>";
                 echo "<td><a class='grenlink' href='#'>Пополнить</a></td></tr>";
             } }
             ?>
@@ -44,7 +44,7 @@
               <td><?php echo $dataOrder->amount; ?> р.</td>
               <td><?php echo $dataOrder->status_name; ?></td>
             </tr>
-          <?php }  } ?>
+          <?php }  } else { } ?>
         </table>
       </div>
     </div>

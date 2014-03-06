@@ -61,47 +61,11 @@ class Welcome_registartion extends CI_Controller{
     $userId = $this->insert_models->insert_data_return_id($_POST, 'users');
 
     if($userId){
+      $addDataArr = array( 'user_id' => $userId, 'purse_number' => intval($_POST['phone']) );
 
-      $functionName = "rich_account_".$_POST['type_user'];
+      $this->insert_models->insert_data_return_id($addDataArr, 'account');
 
-      $this->$functionName($userId, $_POST['phone'], $_POST['hash']);
-    }
-  }
-
-  function rich_account_users($userId, $phone_user, $hash){
-    $this->load->model('insert_data_this_function_mod');
-    
-    $dataDbAdd = array(
-      'user_id' => $userId,
-      'account_type_id' => 5,
-      'account_name' => 'Ричстер',
-      'account_number' => intval($phone_user),
-      'account_balance' => 0
-    );
-
-    $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
-
-    if($queryStatus){
-
-      $this->saveSessionCurentUsers($userId, $hash);
-    }
-  }
-
-  function rich_account_company($userId, $phone_company, $hash){
-    $this->load->model('insert_data_this_function_mod');
-
-    $dataDbAdd = array(
-      'user_id' => $userId,
-      'account_type_id' => 5,
-      'account_company_name' => 'Ричстер',
-      'account_company_number' => intval($phone_company),
-      'account_company_balance' => 00.00
-    );
-
-    $queryStatus = $this->insert_data_this_function_mod->insert($dataDbAdd, __FUNCTION__);
-
-    if($queryStatus){
-      $this->saveSessionCurentUsers($userId, $hash);
+      $this->saveSessionCurentUsers($userId, $_POST['hash']);
     }
   }
 

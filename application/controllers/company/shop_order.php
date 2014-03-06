@@ -32,7 +32,7 @@ class Shop_order extends CI_Controller{
 
     $data['header'] = $this->headerArr;
 
-    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'count_money', 'account');
 
     $this->load->view('company/shop_order_tpl', $data);
   }

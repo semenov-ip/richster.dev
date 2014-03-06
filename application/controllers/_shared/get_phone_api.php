@@ -4,8 +4,8 @@ class Get_phone_api extends CI_Controller {
 
   function __construct(){
     parent::__construct();
-    
-    header('Content-type: text/json');
+//!!!!!!!!!!!    
+    //header('Content-type: text/json');
   }
 
   // Добовление данных, кросбраузерный ajax запрос
@@ -14,6 +14,10 @@ class Get_phone_api extends CI_Controller {
     $this->load->library('sms_sendclass');
     $this->load->model('insert_models');
     $this->load->model('select_models');
+    $this->load->model('extract_data');
+
+//!!!!!!!!!!
+    $_POST = array( "amount" => "100", "company_id" => "17", "order_num" => "123", "shop_id" => "6", "user_id" => "15" );
 
     $addDataArr = array( 'test' => json_encode($_POST) );
 
@@ -22,7 +26,7 @@ class Get_phone_api extends CI_Controller {
     if(!empty($_POST)){
 
       $hash_str = md5(json_encode($_POST));
-
+echo $hash_str;
       if($hash_str == $hash){
 
         if ( !$this->searchCurrentUser($_POST['user_id']) ) return $this->statusIncorect('Отказ. Пользователь не зарегистрирован в системе.');
@@ -79,22 +83,15 @@ class Get_phone_api extends CI_Controller {
   }
 
   function checkUserBalance($user_id, $amount){
-    $this->load->model('extract_data');
+    $whereDataArr = array( 'user_id' => $user_id, 'count_money >' => $amount );
 
-    $whereDataArr = array(
-      'user_id' => $user_id,
-      'account_balance >' => $amount
-    );
+    $userAccount = $this->extract_data->extract_where_limit_asc($whereDataArr, "user_id", 'rich_account');
 
-    $countAscName = "account_user_id";
+    if( is_object($userAccount) ){
 
-    $userAccount = $this->extract_data->extract_where_limit_asc($whereDataArr, 'rich_account_users', $countAscName);
+      $balanceUser = $userAccount->count_money - $amount;
 
-    if( !empty($userAccount) ){
-
-      $balanceUser = $userAccount->account_balance - $amount;
-
-      $this->rich_account_users($userAccount->account_user_id, $balanceUser);
+      $this->rich_account($userAccount->user_id, $balanceUser);
 
       return $statusDescription = array('status_id' => 2, 'description_status_id' => 2);
 
@@ -105,38 +102,26 @@ class Get_phone_api extends CI_Controller {
     }
   }
 
-  function rich_account_users($account_user_id, $balanceUser){
-    $this->load->model('update_data_this_function_mod');
-
-    $dataDbUpdate = array(
-      'account_balance' => $balanceUser
-    );
-
-    $whereDataArr = array(
-      'account_user_id' => $account_user_id
-    );
-
-    $this->update_data_this_function_mod->update_where_id($dataDbUpdate, $whereDataArr, __FUNCTION__);
-  }
-
-  function rich_account_company($company_id, $amount){
+  function rich_account_company($companyId, $amount){
     $this->load->model('update_data_this_function_mod');
 
     $this->load->model('extract_data');
 
-    $whereDataArr = array(
-      'user_id' => $company_id
-    );
+    $whereDataArr['user_id'] = $companyId;
 
-    $accountCompany = $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
+    $accountCompany = $this->extract_data->extract_where_one($whereDataArr, 'rich_account');
 
-    $dataDbUpdate = array(
-      'account_company_balance' => $amount + $accountCompany->account_company_balance
-    );
+    $balanceUser = $accountCompany->count_money + $amount;
 
-    $whereDataArr = array(
-      'user_id' => $company_id
-    );
+    $this->rich_account($companyId, $balanceUser);
+  }
+
+  function rich_account($userId, $balanceUser){
+    $this->load->model('update_data_this_function_mod');
+
+    $dataDbUpdate['count_money'] = $balanceUser;
+
+    $whereDataArr['user_id'] =  $userId;
 
     $this->update_data_this_function_mod->update_where_id($dataDbUpdate, $whereDataArr, __FUNCTION__);
   }

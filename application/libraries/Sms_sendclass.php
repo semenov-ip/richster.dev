@@ -16,17 +16,17 @@
 
       // Телефоный номер по шаблону смс оператора
       $str_symbol = array("("=>"", ")"=>"", "+"=>"", "-"=>"", " "=>"", "8"=>"7");
-      $phone = strtr($userAccountData->account_number, $str_symbol);
+      $phone = strtr($userAccountData->purse_number, $str_symbol);
 
-      $message = "Richster: покупка в магазине ".$shopName." на сумму ".$postData['amount']. "руб. Остаток: ".$userAccountData->account_balance. "руб. Статус операции: ".$orderStatus;
-
+      $message = "Richster: покупка в магазине ".$shopName." на сумму ".$postData['amount']. "руб. Остаток: ".$userAccountData->count_money. "руб. Статус операции: ".$orderStatus;
+      
       list($sms_id, $sms_cnt, $cost, $balance) = send_sms($phone, $message);
     }
 
     function getUserAccountData($userId){
       $dataWhereArr['user_id'] = $userId;
 
-      return $this->ci->select_models->select_one_row_where_column_selectcolumn($dataWhereArr, 'account_number, account_balance', 'account_users');
+      return $this->ci->select_models->select_one_row_where_column_selectcolumn($dataWhereArr, 'purse_number, count_money', 'account');
     }
 
     // Генерация смс сообщения

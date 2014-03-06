@@ -41,7 +41,7 @@ class Extract_data extends CI_Model{
     return false;
   }
 
-  function extract_where_limit_asc($whereDataArr, $dbNameFunction, $countAscName){
+  function extract_where_limit_asc($whereDataArr, $countAscName, $dbNameFunction){
     if(is_array($whereDataArr)){
       
       $this->db->limit(1);

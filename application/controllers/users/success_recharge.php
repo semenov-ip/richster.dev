@@ -40,7 +40,7 @@ class Success_recharge extends CI_Controller {
   function rechargeUser($dataCallback){
     $dataWhereArr['user_id'] = $dataCallback['orderId'];
 
-    return $this->update_models->update_set_one_where_column_setplus($dataWhereArr, 'account_balance', $dataCallback['recipientAmount'], 'account_users');
+    return $this->update_models->update_set_one_where_column_setplus($dataWhereArr, 'count_money', $dataCallback['recipientAmount'], 'account');
   }
 
   function view(){

@@ -19,11 +19,13 @@
               <td>Подробнее</td>
             </tr>
           <?php 
-            foreach ($qrcode as $dataQrCode) {
-              echo '<tr><td><img width=100px src="/'.$dataQrCode->qrcode_img.'"></td>';
-              echo '<td><textarea class="form-control" rows="4"><img src="http://'.$_SERVER["HTTP_HOST"].'/'.$dataQrCode->qrcode_img.'"></textarea></td>';
-              echo '<td>'.date("d/m/Y", $dataQrCode->data_add).'</td>';
-              echo '<td><a href="/company/qrcode_generator/view/'.$dataQrCode->qrcode_id.'/">Подробнее</a></td></tr>';
+          if( !empty($qrcode) ){
+              foreach ($qrcode as $dataQrCode) {
+                echo '<tr><td><img width=100px src="/'.$dataQrCode->qrcode_img.'"></td>';
+                echo '<td><textarea class="form-control" rows="4"><img src="http://'.$_SERVER["HTTP_HOST"].'/'.$dataQrCode->qrcode_img.'"></textarea></td>';
+                echo '<td>'.date("d/m/Y", $dataQrCode->data_add).'</td>';
+                echo '<td><a href="/company/qrcode_generator/view/'.$dataQrCode->qrcode_id.'/">Подробнее</a></td></tr>';
+              }
             } ?>
           </table>
         </div>

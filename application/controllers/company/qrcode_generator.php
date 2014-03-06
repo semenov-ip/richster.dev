@@ -39,7 +39,7 @@ class Qrcode_generator extends CI_Controller {
 
     $this->qrcodeGeneratePages($companyDataCurrent['user_id'], $shopDataObj);
 
-    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'count_money', 'account');
 
     $data['header'] = $this->headerArr;
 
@@ -149,7 +149,7 @@ class Qrcode_generator extends CI_Controller {
 
     $data['user'] = $this->rich_users($companyDataCurrent['user_id']);
 
-    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'count_money', 'account');
 
     $data['header'] = $this->headerArr;
 

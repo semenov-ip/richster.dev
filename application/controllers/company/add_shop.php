@@ -29,7 +29,7 @@ class Add_shop extends CI_Controller {
 
     $data['user'] = $this->rich_users($companyDataCurrent['user_id']);
 
-    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'account_company_balance', 'account_company');
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $companyDataCurrent['user_id']), 'count_money', 'account');
 
     $data['header'] = $this->headerArr;
 

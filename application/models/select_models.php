@@ -94,9 +94,10 @@
             $dataQuery[] = $row;
           }
 
+        
+          return $dataQuery;
         }
-
-        return $dataQuery;
+        
       }
 
       return false;

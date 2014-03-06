@@ -375,15 +375,54 @@ $config['date']  = date("Y-m-d H:i:s");
 $config['prefixes'] = 'rich_';
 
 $config['error_message'] = array(
-  "empty_data" => array( "text" => "Все поля являются обязательными для заполнения.", "class" => "alert-warning" ),
-  
+   "empty_data" => array( "text" => "Все поля являются обязательными для заполнения.", "class" => "alert-warning" ),
   "password_confirm" => array( "text" => "Ваши пароли не совпадают", "class" => "alert-warning" ),
-  
   "email_confirm" => array( "text" => "Указанный e-mail уже зарегистрирован!", "class" => "alert-warning" ),
-  
   "email_password_incorrect" => array( "text" => "Логин или пароль указаны не верно!", "class" => "alert-warning" ),
-  
   "webmoney_input_error" => array( "text" => "Не верно указан номер WMR-кошелька!", "class" => "alert-warning" ),
   "webmoney_double_save" => array( "text" => "В целях безопасности, вы не можете изменить WMR-кошелек!", "class" => "alert-warning" ),
   "success_save_update_data" => array( "text" => "Изменения сохранены!", "class" => "alert-success" ),
+
+  "success_save_send_mail" => array( "text" => "Рассылка завершена!", "class" => "alert-success" ),
+
+  "success_save_data" => array( "text" => "Данные были успешно сохранены!", "class" => "alert-success" ),
+  "empty_url" => array( "text" => "Не указан адрес сайта!", "class" => "alert-warning" ),
+  "empty_name" => array( "text" => "Не указано название компании!", "class" => "alert-warning" ),
+  "url_confirm" => array( "text" => "Указан недопустимый адрес сайта. Указанный сайт уже есть в системе!", "class" => "alert-warning" ),
+  "empty_subid" => array( "text" => "Есои Вы выбрали метку SubID, то необходимо указать {tiz_id} и {source}", "class" => "alert-warning" ),
+  "empty_image" => array( "text" => "Не выбрано изображение!", "class" => "alert-warning" ),
+  "error_image_type" => array( "text" => "Не допустимый тип изображения.", "class" => "alert-warning" ),
+  "image_not_upload" => array( "text" => "Не удалось сохранить изображение.", "class" => "alert-warning" ),
+  "more_text_size" => array( "text" => "Текст описания больше 100 символов.", "class" => "alert-warning" ),
+  "empty_name_block" => array( "text" => "Не указано название блока!", "class" => "alert-warning" ),
+  "empty_position" => array( "text" => "Не выбрано положение изображения относительно текста!", "class" => "alert-warning" ),
+  "empty_align" => array( "text" => "Не выбран способ выравнивания объявления!", "class" => "alert-warning" ),
+  "empty_block_size" => array( "text" => "Не указана ширина блок!", "class" => "alert-warning" ),
+  "emprt_title_ticket" => array( "text" => "Не указан заголовок!", "class" => "alert-warning" ),
+  "emprt_text_ticket" => array( "text" => "Не указано описание!", "class" => "alert-warning" ),
+  "empty_summ" => array( "text" => "Не указана сумма выплаты!", "class" => "alert-warning" ),
+  "check_user_count_money" => array( "text" => "У Вас недостаточно средств на балансе!", "class" => "alert-warning" ),
+  "empty_text_blocking" => array( "text" => "Не указанна причина блокировки сайта!", "class" => "alert-warning" ),
+
+  "empty_email" => array( "text" => "Необходимо указать свой E-mail!", "class" => "alert-warning" ),
+
+  "email_check_validation" => array( "text" => "Необходимо указать правильный E-mail!", "class" => "alert-warning" ),
+
+  "non_existent_email" => array( "text" => "Вы указали не существующий e-mail!", "class" => "alert-warning" ), 
+
+  "success_sand" => array( "text" => "Новый пароль отправлен Вам на почту!", "class" => "alert-success" ), 
+
+  "empty_stat_login" => array( "text" => "Не указанны данные для доступа к независимой статистике сайта!", "class" => "alert-warning" ),
+
+  "show_referer" => "Неопределённая ссылка",
+  "emprt_remote_port" => "Удалённый порт не обнаружен",
+  "emprt_user_agen" => "Проблемы работы браузера",
+  "empty_blockid_referer" => "Нету данных по блоку или сайту",
+  "empty_blockid_referer_db" => "Данные по блоку и сайту не обнаруженны",
+  "block_status_off" => "Сайт находиться на модерации.",
+  "block_users_off" => "Пользователь заблокирован",
+  "empty_campaign" => "Компании не обнаруженны",
+  "empty_teaser" => "Тизеры не обнаруженны",
+  "empty_block" => "Данный блок приостановлен или заблокирован",
+  "empty_site" => "Данный сайт приостановлен или заблокирован"
 );

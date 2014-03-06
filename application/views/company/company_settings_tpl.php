@@ -24,8 +24,8 @@
             </tr>
             <?php 
               if(!empty($account_company)){ foreach ($account_company as $accountCompanyObj) {
-                echo "<tr><td>".$accountCompanyObj->account_company_number."</td>";
-                echo "<td>".$accountCompanyObj->account_company_balance."</td></tr>";
+                echo "<tr><td>".$accountCompanyObj->purse_number."</td>";
+                echo "<td>".$accountCompanyObj->count_money."</td></tr>";
               } }
             ?>
           </table>

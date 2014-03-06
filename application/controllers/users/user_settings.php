@@ -28,13 +28,13 @@ class User_settings extends CI_Controller {
 
     $data['user'] = $this->rich_users($userDataCurrentAccunt['user_id']);
 
-    $data['account_user'] = $this->rich_account_users($userDataCurrentAccunt['user_id']);
-
+    $data['userAccountObj'] = $this->getUserAccountObj($userDataCurrentAccunt['user_id']);
+    
     $data['history_order'] = $this->rich_order($userDataCurrentAccunt['user_id']);
 
     $data['header'] = $this->headerArr;
 
-    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $userDataCurrentAccunt['user_id']), 'account_balance', 'account_users');
+    $data['totalSumm'] = $this->get_total_summ->getSumm(array('user_id' => $userDataCurrentAccunt['user_id']), 'count_money', 'account');
 
     $this->load->view('users/user_settings_tpl', $data);
   }
@@ -47,12 +47,10 @@ class User_settings extends CI_Controller {
     return $this->extract_data->extract_where_one($whereDataArr, __FUNCTION__);
   }
 
-  function rich_account_users($user_id){
-    $whereDataArr = array (
-      'user_id' => $user_id
-    );
+  function getUserAccountObj($user_id){
+    $whereDataArr['user_id'] = $user_id;
 
-    return $this->extract_data->extract_where_all($whereDataArr, __FUNCTION__);
+    return $this->select_models->select_all_row_where_column($whereDataArr, 'account');
   }
 
   function rich_order($userId){

@@ -26,7 +26,7 @@ class User_distributor extends CI_Controller{
   }
 
   function registrationPag(){
-    redirect( "/", 'location');
+    redirect( "/_shared/log_out/", 'location');
   }
 
   function users($dataUser){
